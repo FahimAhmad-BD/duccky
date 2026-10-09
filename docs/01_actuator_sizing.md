@@ -1,6 +1,6 @@
 # Duccky v1.0: Actuator Sizing Study
 
-**Document:** DCK-01 · **Revision:** A · **Phase:** 1 · **Source:** `analysis/sizing`
+**Document:** DCK-01 · **Revision:** B · **Phase:** 1 · **Source:** `analysis/sizing`
 
 ## 1. Result
 
@@ -86,7 +86,7 @@ The knee peak of 0.495 N m comes from the 1.5 Hz squat (D1). Hip pitch is the jo
 
 ## 7. Limitations
 
-The model uses primitive shapes and budgeted masses, so inertias are approximate until Phase 3. The dynamic factor of 1.5 and the 60 % CoP region are engineering assumptions, not measured gait data; Phase 5 replaces them with joint torque logs from trained walking policies, and the study is rerun. Gear backlash, servo friction and the real torque speed curve are not modelled here; they enter through the actuator model in Phase 4.
+The model uses primitive shapes and budgeted masses, so inertias are approximate until Phase 3. The dynamic factor of 1.5 and the 60 % CoP region are engineering assumptions, not measured gait data; Phase 6 replaces them with joint torque logs from trained walking policies, and the study is rerun. Gear backlash, servo friction and the real torque speed curve are not modelled here; they enter through the actuator model in Phase 5.
 
 ## 8. Reproduce
 

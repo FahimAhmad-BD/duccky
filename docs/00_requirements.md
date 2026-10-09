@@ -1,6 +1,6 @@
 # Duccky v1.0: Requirements and Budgets
 
-**Document:** DCK-00 · **Revision:** A · **Phase:** 0 · **Status:** Baseline for Phase 3 CAD
+**Document:** DCK-00 · **Revision:** B · **Phase:** 0 · **Status:** Baseline for Phase 2 electrical and Phase 3 CAD
 
 ## 1. Purpose
 

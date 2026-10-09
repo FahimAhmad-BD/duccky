@@ -42,7 +42,7 @@ LEG = {
     "shank": 0.050,          # knee -> ankle (shorter than thigh: cuts knee lever arm)
     "ankle_to_sole": 0.006,  # ankle axis -> sole
     "foot": (0.075, 0.036, 0.008),  # sole box full size
-    "foot_ankle_x": -0.006,  # ankle axis forward of foot centre (negative: foot extends forward)
+    "foot_ankle_x": -0.006,  # ankle axis x relative to foot centre (negative: ankle 6 mm behind, foot extends forward)
     # Printed + fastener mass per link (servo mass is added separately)
     "m_hip_bracket": 0.008,
     "m_thigh": 0.022,
@@ -69,7 +69,7 @@ HEAD = {
     "beak_len": 0.040,
     "m_neck": 0.012,
     "m_head_struct": 0.030,
-    "m_head_payload": 0.012,  # camera, ToF, NFC, wiring
+    "m_head_payload": 0.012,  # camera, ToF, wiring
     "m_beak": 0.010,
     "lim_neck_pitch": (-1.50, 1.00),
     "lim_head_pitch": (-1.50, 1.50),

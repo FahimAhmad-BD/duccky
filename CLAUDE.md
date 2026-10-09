@@ -33,7 +33,8 @@ The twin has five layers, all derived from one source of truth so they cannot dr
 4. Give direct recommendations, not hedged option lists.
 5. Formal documents: publication ready, no meta commentary, fully justified body text when exported.
 6. Code always goes in files, never long inline snippets.
-7. User background: mechanical design and manufacturing (B.Sc. IPE, SolidWorks CSWP). Engineering project manager in robotics and automation. Strong in CAD and DFM, newer to software, Linux and ROS 2. Explain software concepts plainly; skip mechanical basics.
+7. **Version control:** the repository is the private GitHub repo `duccky` (branch `main`). When a phase is complete, commit its work and push to GitHub, then tag the commit `phase-N`. Commit fixes between phases as they happen.
+8. User background: mechanical design and manufacturing (B.Sc. IPE, SolidWorks CSWP). Engineering project manager in robotics and automation. Strong in CAD and DFM, newer to software, Linux and ROS 2. Explain software concepts plainly; skip mechanical basics.
 
 ## 4. Toolchain (all free)
 
