@@ -56,7 +56,7 @@ User hardware: Asus A15 laptop, Ryzen 9 8945H, 32 GB RAM, RTX 4060. Windows on t
 |---|---|---|
 | 0 | Requirements, DOF, mass and power budgets | **Done.** `docs/00_requirements.md` |
 | 1 | Sim first actuator sizing and servo selection | **Done.** `docs/01_actuator_sizing.md`, `analysis/sizing/` |
-| 2 | Electrical architecture, KiCad carrier board, harness | **Next** |
+| 2 | Electrical architecture, KiCad carrier board, harness | **In progress.** Compute selected (DCK-02 §1); next is component selection (§9 item 2) |
 | 3 | Mechanical CAD in Fusion with DFM rules | Planned |
 | 4 | Engineering validation: load derived FEA, tolerance stacks, range of motion and interference, thermal and power | Planned |
 | 5 | Robot description: URDF, MJCF, ROS 2 package, generated from Fusion JSON | Planned |
