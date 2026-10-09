@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.stl binary
+*.step binary
+*.stp binary
+*.f3d binary
+*.onnx binary
+*.kicad_pcb text eol=lf
+*.kicad_sch text eol=lf
