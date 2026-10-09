@@ -95,7 +95,7 @@ Each knee has a parallel assist torsion spring, 0.10 N m/rad, with its rest angl
 * Separate 5 V compute rail, pack protection, main switch, fuse and a hardware torque disable line.
 * Servo bus: one daisy chain per leg plus one for the neck and head.
 * Sensors: wide angle camera, 8 × 8 ToF sensor, trunk IMU (head IMU optional), microphone and speaker.
-* Compute: an RK3566 class SBC (Radxa Zero 3W is the leading candidate) or a Raspberry Pi Zero 2W as fallback. **Phase 2 decides this.**
+* Compute: **Radxa ZERO 3W, 4 GB RAM, 16 GB eMMC** (decided in DCK-02 §1). Raspberry Pi Zero 2W is the fallback on the same 65 × 30 mm footprint. Each servo chain gets its own UART (UART3, UART4, UART5; UART9 spare).
 
 **Software baseline:**
 * Python runtime with a 50 Hz control process owning the servo bus, IMU reads, ONNX inference and the safety layer (fall detection, torque cut, current and thermal watchdogs).
