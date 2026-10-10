@@ -20,7 +20,7 @@ The twin has five layers, all derived from one source of truth so they cannot dr
 
 1. **Zero cost.** Only free tools, free licenses and free community assets. No paid services, APIs, cloud tokens or add-ins. GPU training uses free Kaggle or Colab quotas, or the local machine.
 2. **Fusion is the mechanical CAD master** (personal use license). It is available on the user's Windows machine. STEP and STL exports work on the free tier; IGES, SAT and SMT do not. Fusion simulation needs paid cloud tokens, so FEA goes to FreeCAD FEM with CalculiX. Keep the robot in as few Fusion documents as possible, since the free tier limits active documents.
-3. **CAD workflow:** write Fusion API Python scripts that build parts and the assembly with named user parameters, joints and materials. The user runs them from Utilities > Scripts and Add-Ins. A second export script dumps STEP, per part STL, and a JSON of joint frames, axes, limits, masses and inertias. URDF and MJCF are generated from that JSON. Fusion stays the single source of truth.
+3. **CAD workflow:** write Fusion API Python scripts that build parts and the assembly with named user parameters, joints and materials. Claude runs them directly through the DucckyBridge add-in (`cad/tools/DucckyBridge`, installed in Fusion with Run on Startup): `bash cad/tools/fusion_run.sh <job.py>` drops the job in `%USERPROFILE%/Documents/ClaudeFusion/bridge/inbox` and prints the result JSON, including viewport PNG paths that Claude reads to check the geometry. Build scripts are committed in `cad/` so the model can always be regenerated. A second export script dumps STEP, per part STL, and a JSON of joint frames, axes, limits, masses and inertias. URDF and MJCF are generated from that JSON. Fusion stays the single source of truth.
 4. **No Pollen Microduck meshes or CAD** in the design. They are CC BY-NC-SA. Pollen's Apache 2.0 code (microduck, microduck_rl) may be used as a reference for training and runtime architecture.
 5. **Every purchased part is real**, currently sold, with a published datasheet. Log every third party asset with source and license in `docs/asset_register.md`.
 6. **No invented facts.** Every number in the design record traces to a source, a calculation or a simulation in this repo. Look up current specs instead of recalling them.
@@ -42,13 +42,15 @@ The twin has five layers, all derived from one source of truth so they cannot dr
 |---|---|
 | Mechanical CAD | Fusion (personal use) |
 | FEA, tolerance checks, 2D drawings | FreeCAD (FEM with CalculiX, TechDraw) |
-| Electronics | KiCad |
+| Electronics | KiCad 10 |
 | Simulation | MuJoCo (Python bindings) |
 | RL training | microduck_rl recipe (mjlab, MuJoCo Warp, PPO, ONNX export) on free GPU |
 | Renders and video | Blender |
 | Hosting and demo | GitHub, GitHub Pages with MuJoCo WebAssembly |
 
 User hardware: Asus A15 laptop, Ryzen 9 8945H, 32 GB RAM, RTX 4060. Windows on the internal drive; Ubuntu 24.04 with ROS 2 Jazzy on an external SSD.
+
+**All work runs on Windows** (user decision, 2026-10-10). Installed: Git, GitHub CLI, Python 3.12 (venv at `%USERPROFILE%\.venvs\duccky`, outside OneDrive; run Python with `%USERPROFILE%\.venvs\duccky\Scripts\python.exe`), KiCad 10. Linux only tools (RL stack, ROS 2) are tried natively first, then in WSL2 if needed. Phase 1 reproduces on Windows with identical numbers.
 
 ## 5. Status
 
