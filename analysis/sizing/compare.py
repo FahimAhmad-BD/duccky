@@ -26,7 +26,7 @@ KGCM = 0.0980665
 
 # Published figures; sources listed in docs/01_actuator_sizing.md
 SERVOS = {
-    "XL330-M288-T": {"maker": "ROBOTIS", "stall_Nm": 0.52, "noload_rpm": 104, "mass_kg": 0.018,
+    "XL330-M288-T": {"maker": "ROBOTIS", "stall_Nm": 0.52, "noload_rpm": 103, "mass_kg": 0.018,
                      "envelope_mm": "20 x 34 x 26", "volt": "5.0"},
     "XC330-M288-T": {"maker": "ROBOTIS", "stall_Nm": 0.93, "noload_rpm": 81, "mass_kg": 0.023,
                      "envelope_mm": "20 x 34 x 26", "volt": "5.0"},

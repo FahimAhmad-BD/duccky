@@ -1,10 +1,10 @@
 # Duccky v1.0: Actuator Sizing Study
 
-**Document:** DCK-01 · **Revision:** B · **Phase:** 1 · **Source:** `analysis/sizing`
+**Document:** DCK-01 · **Revision:** C · **Phase:** 1 · **Source:** `analysis/sizing`
 
 ## 1. Result
 
-Duccky v1.0 uses **ROBOTIS XC330-M288-T** servos at hip pitch, knee and ankle (6 units) and **ROBOTIS XL330-M288-T** servos at the other nine joints, with a **parallel assist spring at each knee (0.10 N m/rad, rest angle straight)**. This configuration passes every rule at 813 g. Both servos share the 20 × 34 mm footprint (heights 25 and 26 mm) and the same TTL bus, so the leg brackets use one servo pocket design throughout.
+Duccky v1.0 uses **ROBOTIS XC330-M288-T** servos at hip pitch, knee and ankle (6 units) and **ROBOTIS XL330-M288-T** servos at the other nine joints, with a **parallel assist spring at each knee (0.10 N m/rad, rest angle straight)**. This configuration passes every rule at 813 g, and again at 825 g after the Phase 2 rerun (Section 9). Both servos share the 20 × 34 × 26 mm envelope and the same TTL bus, so the leg brackets use one servo pocket design throughout.
 
 ![Demand against servo limits](../analysis/sizing/results/demand_vs_capacity.png)
 
@@ -97,3 +97,17 @@ python compare.py                       # all configurations, tables and plot
 python sizing.py --tag custom --override '{"knee": 0.023}' --set '{"LEG.knee_spring_k": 0.1}'
 MUJOCO_GL=osmesa python render.py results/G_E_plus_knee_spring/duccky_sizing.xml out.png
 ```
+
+## 9. Phase 2 rerun
+
+Phase 2 replaced three inputs: the battery cartridge (105 g, was 85 g), the speaker and microphone (4 g, was 12 g), and the XL330 no-load speed from the ROBOTIS e-Manual (103 rpm, was 104). The robot now weighs 825 g. Configuration G still passes every rule, and the files in `results/` are from this run.
+
+| Joint | Servo | Walk (N m) | Peak (N m) | Walk % | Peak % |
+|---|---|---|---|---|---|
+| hip yaw | XL330-M288-T | 0.182 | 0.182 | 35 | 35 |
+| hip roll | XL330-M288-T | 0.131 | 0.146 | 25 | 28 |
+| hip pitch | XC330-M288-T | 0.357 | 0.368 | 38.4 | 40 |
+| knee | XC330-M288-T | 0.304 | 0.494 | 33 | 53 |
+| ankle | XC330-M288-T | 0.344 | 0.351 | 37 | 38 |
+
+Neck, head and beak demands are unchanged. Hip pitch remains the joint with the least margin (risk RK1).

@@ -14,7 +14,7 @@
     "beak": 0.02
   },
   "param_overrides": {},
-  "robot_mass_kg": 0.813,
+  "robot_mass_kg": 0.825,
   "nominal_crouch_rad": 0.8,
   "gait": {
     "step_hz": 2.5,
@@ -43,59 +43,59 @@
   },
   "demand": {
     "hip_yaw": {
-      "walk_peak": 0.1794,
-      "peak": 0.1794,
+      "walk_peak": 0.1821,
+      "peak": 0.1821,
       "static_single_support_max": 0.0,
       "hip_hinge_max": 0.0,
       "dynamic_max": 0.0,
-      "pivot_friction_worst": 0.1794,
+      "pivot_friction_worst": 0.1821,
       "speed_rad_s": 1.1781
     },
     "hip_roll": {
-      "walk_peak": 0.1291,
-      "peak": 0.1436,
-      "static_single_support_max": 0.1436,
+      "walk_peak": 0.1311,
+      "peak": 0.1457,
+      "static_single_support_max": 0.1457,
       "hip_hinge_max": 0.0,
       "dynamic_max": 0.0,
       "speed_rad_s": 0.9425
     },
     "hip_pitch": {
-      "walk_peak": 0.353,
-      "peak": 0.3642,
-      "static_single_support_max": 0.3642,
-      "hip_hinge_max": 0.1897,
-      "dynamic_max": 0.252,
+      "walk_peak": 0.3584,
+      "peak": 0.3699,
+      "static_single_support_max": 0.3699,
+      "hip_hinge_max": 0.1912,
+      "dynamic_max": 0.2515,
       "speed_rad_s": 2.7489
     },
     "knee": {
-      "walk_peak": 0.4184,
-      "peak": 0.5527,
-      "static_single_support_max": 0.5463,
-      "hip_hinge_max": 0.0914,
-      "dynamic_max": 0.5527,
+      "walk_peak": 0.4246,
+      "peak": 0.5558,
+      "static_single_support_max": 0.5547,
+      "hip_hinge_max": 0.0941,
+      "dynamic_max": 0.5558,
       "swing_spring_check": 0.0275,
       "speed_rad_s": 3.927
     },
     "ankle": {
-      "walk_peak": 0.3392,
-      "peak": 0.3458,
-      "static_single_support_max": 0.3458,
-      "hip_hinge_max": 0.1821,
-      "dynamic_max": 0.2501,
+      "walk_peak": 0.3442,
+      "peak": 0.3509,
+      "static_single_support_max": 0.3509,
+      "hip_hinge_max": 0.1834,
+      "dynamic_max": 0.2496,
       "speed_rad_s": 2.3562
     },
     "neck_pitch": {
       "walk_peak": 0.0994,
       "peak": 0.0994,
       "static_max": 0.0994,
-      "dynamic_max": 0.0457,
+      "dynamic_max": 0.0465,
       "speed_rad_s": 1.5708
     },
     "head_pitch": {
       "walk_peak": 0.0587,
       "peak": 0.0587,
       "static_max": 0.0587,
-      "dynamic_max": 0.0475,
+      "dynamic_max": 0.0479,
       "speed_rad_s": 2.3562
     },
     "head_yaw": {

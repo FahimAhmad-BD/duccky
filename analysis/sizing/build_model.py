@@ -125,8 +125,8 @@ def build(servo_mass=P.SERVO["mass"], kp=40.0, overrides=None):
         servo_geom("servo_neck_pitch", (P.HEAD["neck_base"][0], 0, P.HEAD["neck_base"][2] - 0.012), ms("neck_pitch")),
     ])
     # Payload lumped as boxes at their intended locations
-    bat = payload["battery_npf550"]
-    rest = sum(v for k, v in payload.items() if k != "battery_npf550")
+    bat = payload["battery_pack"]
+    rest = sum(v for k, v in payload.items() if k != "battery_pack")
     acts = "\n    ".join(
         f'<position name="{j}" joint="{j}" kp="{kp}" kv="0.4" inheritrange="1"/>' for j in JOINTS)
     sensors = "\n    ".join(

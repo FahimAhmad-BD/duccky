@@ -56,11 +56,127 @@ Radxa recommends a 5 V / 2 A supply for the ZERO 3W and does not publish a power
 
 ## 2. Component selection
 
-To be completed in Phase 2.
+### 2.1 Servos (confirmed against the ROBOTIS e-Manual)
+
+The e-Manual confirms the Phase 1 figures and closes risk RK4, with two corrections: the XL330 no-load speed is 103 rpm (the reseller listed 104), and the XL330 is 26 mm deep (listed as 25). Phase 1 was rerun with 103 rpm.
+
+| Servo | Stall torque at 5.0 V | No-load speed at 5.0 V | Stall current at 5.0 V | Standby current | Mass | Envelope |
+|---|---|---|---|---|---|---|
+| XL330-M288-T | 0.52 N m | 103 rpm | 1.47 A | 17 mA | 18 g | 20 × 34 × 26 mm |
+| XC330-M288-T | 0.93 N m | 81 rpm | 1.80 A | 17 mA | 23 g | 20 × 34 × 26 mm |
+
+Both run from 3.7 to 6.0 V (5.0 V recommended). Their bus is a TTL multidrop line at 3.3 V logic that tolerates 5 V, at 57.6 kbps by default and up to 4 Mbps. Each servo has two JST B3B-EH-A headers (pin 1 GND, pin 2 VDD, pin 3 DATA), and the cables use JST EHR-03 housings with SEH-001T-P0.6 crimps on 21 AWG wire.
+
+### 2.2 Selected parts
+
+| Function | Part | Key data | Location |
+|---|---|---|---|
+| Computer | Radxa ZERO 3W, 4 GB, 16 GB eMMC | RK3566, 5 V input | Trunk |
+| Camera | Radxa Camera 8M 219 (Sony IMX219) | 3280 × 2464, on Radxa's supported list for the ZERO 3W, 22 pin to 15 pin FPC cable | Head |
+| IMU | CEVA BNO085 | 9 axis with onboard sensor fusion, I2C, 28 pin LGA 5.2 × 3.8 mm | Carrier board, trunk |
+| Depth sensor | ST VL53L8CX | 8 × 8 zones, 400 cm, 65° diagonal field of view, 60 Hz; AVDD 3.3 V, core and IO 1.8 V | Head board |
+| Microphone | TDK T5848 (MMICT5848-00-012) | I2S MEMS, 1.62 to 1.98 V supply, 3.5 × 2.65 × 0.98 mm | Carrier board |
+| Audio amplifier | Analog Devices MAX98357A | I2S class D, 3.2 W into 4 Ω at 5 V, 2.5 to 5.5 V supply | Carrier board |
+| Speaker | Same Sky CMS-18132-18SP | 8 Ω, 1 W, 18 × 13 × 2.5 mm, 1.9 g | Trunk shell, printed back cavity |
+| Servo bus buffer | 74LVC2G241, three units (TI SN74LVC2G241 or Nexperia 74LVC2G241) | Dual buffer with separate output enables, 1.65 to 5.5 V, 5 V tolerant inputs | Carrier board |
+| Servo rail regulator | TI TPS56C215 | 12 A synchronous buck, up to 17 V input, 0.6 to 5.5 V output, 3.5 × 3.5 mm QFN | Carrier board |
+| Compute rail regulator | TI TPS62933 | 3 A synchronous buck, 3.8 to 30 V input | Carrier board |
+| Input protection and switch | TI TPS25982 eFuse | 2.7 to 24 V, current limit adjustable 2 to 15 A, 2.7 mΩ, current monitor output | Carrier board |
+| Battery cells | 2 × Molicel INR-18650-P28A | 2800 mAh typical, 3.6 V nominal, 35 A maximum discharge | Battery cartridge |
+| Cell protection | ABLIC S-8252 with dual N channel MOSFET | 2 series cells: overcharge, overdischarge, discharge and charge overcurrent | Cartridge board |
+| Charger | TI BQ25887 | 2S boost charger with cell balancing, 3.9 to 6.2 V input from USB-C, 2 A charge current | Carrier board |
+| Servo connectors | JST B3B-EH-A headers, EHR-03 housings | Same family as the servos | Carrier board and harness |
+
+Passive and glue parts (1.8 V and 3.3 V LDOs, I2C and I2S level translators, cartridge MOSFETs, backup fuse, USB-C receptacle) are chosen during schematic capture from parts with KiCad library footprints and listed in the BOM.
+
+### 2.3 Battery
+
+The battery is a tool-free cartridge holding two Molicel INR-18650-P28A cells in series (2S), giving 7.2 V nominal, 8.4 V when full and 20.6 Wh (2 × 10.3 Wh typical). This replaces the NP-F550 type pack in DCK-00, because no NP-F pack sold today has a manufacturer datasheet.
+
+The cartridge carries the S-8252 protection board, a 10 kΩ NTC thermistor and four blade contacts: B+, mid-cell, B− and thermistor. The mid-cell contact lets the BQ25887 balance the cells, so the pack charges inside the robot from a USB-C port. The robot is powered off while charging, because the BQ25887 has no power path. Spare cartridges charge in the robot or on any 2S balance charger.
+
+The cartridge mass is allocated at 105 g: two cells at about 46 g each (a retailer figure, since Molicel's sheet does not list mass) plus 13 g for the board, contacts and printed housing.
+
+### 2.4 Sources
+
+* XL330-M288-T e-Manual: https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/
+* XC330-M288-T e-Manual: https://emanual.robotis.com/docs/en/dxl/x/xc330-m288/
+* Radxa ZERO 3 camera support: https://docs.radxa.com/en/zero/zero3/accessories/camera
+* Radxa Camera 8M 219: https://docs.radxa.com/en/accessories/camera/camera-8m-219
+* BNO085 (DigiKey): https://www.digikey.com/en/products/detail/ceva-technologies-inc/BNO085/9445941
+* VL53L8CX (ST, DS14161): https://www.st.com/en/imaging-and-photonics-solutions/vl53l8cx.html
+* T5848 (TDK): https://invensense.tdk.com/products/digital/t5848/
+* MAX98357A (Analog Devices): https://www.analog.com/en/products/max98357a.html
+* CMS-18132-18SP datasheet: https://cdn.eicom.ru/media/PDF/8020010.pdf
+* 74LVC2G241 (Nexperia): https://www.nexperia.com/products/logic/buffers-drivers-transceivers/buffers-inverters-drivers/74LVC2G241GD.html
+* TPS56C215: https://www.ti.com/product/TPS56C215
+* TPS62933: https://www.ti.com/product/TPS62933
+* TPS25982: https://www.ti.com/product/TPS25982
+* BQ25887: https://www.ti.com/product/BQ25887
+* S-8252 (ABLIC): https://www.ablic.com/en/semicon/datasheets/power-management-ic/lithium-ion-battery-protection-ic/s-8252/
+* INR-18650-P28A data sheet: https://www.imrbatteries.com/content/molicel_p28a.pdf
+
+### 2.5 Parts rejected
+
+| Part | Reason |
+|---|---|
+| TDK ICS-43434 microphone | Past its June 2026 last time buy date at DigiKey |
+| Knowles SPH0645LM4H-B microphone | Listed as obsolete |
+| VL53L5CX depth sensor | Superseded by the VL53L8CX, which has lower power and better ambient light performance |
+| NP-F550 type pack | No pack sold today has a manufacturer datasheet (rule 5) |
 
 ## 3. Block diagram and power tree
 
-To be completed in Phase 2.
+### 3.1 Power tree
+
+```
+2S cartridge (6.0 to 8.4 V, S-8252 protection)
+  └─ blade contacts ─ main switch ─ TPS25982 eFuse (15 A limit, current monitor to ADC)
+        ├─ TPS56C215 ── 5.0 V SERVO rail, 12 A ── 3 servo chains (left leg, right leg, neck and head)
+        │                 EN = torque enable (SBC GPIO, held low by default)
+        └─ TPS62933 ─── 5.0 V COMPUTE rail, 3 A
+                          ├─ Radxa ZERO 3W (header 5 V pins) ── camera (CSI)
+                          ├─ MAX98357A ── speaker
+                          ├─ 3.3 V LDO ── BNO085, bus buffers, VL53L8CX AVDD (head board)
+                          └─ 1.8 V LDO ── T5848 mic; head board has its own 1.8 V LDO for the VL53L8CX
+USB-C (5 V) ── BQ25887 charger ── cartridge (balanced through the mid-cell contact)
+```
+
+The servo regulator's enable pin is the hardware torque disable line. It defaults low through a pull-down, so the servo rail stays off until the runtime raises it. The safety layer drops it on a fall, a current fault or a watchdog timeout, and the main switch removes it physically.
+
+### 3.2 Current budget
+
+| Rail | Load | Current | Basis |
+|---|---|---|---|
+| Servo 5.0 V | Six leg servos stalling at once (hip pitch, knee, ankle) | 10.8 A | 6 × 1.80 A, e-Manual |
+| | Nine XL330 at standby | 0.15 A | 9 × 17 mA, e-Manual |
+| | **Design peak** | **11.0 A**, regulator 12 A | |
+| Compute 5.0 V | Radxa ZERO 3W with camera | 2.0 A | Radxa's recommended supply rating |
+| | MAX98357A driving 1 W | 0.25 A | 1 W ÷ 5 V ÷ 0.92 efficiency, ADI figure at 1 W into 8 Ω |
+| | IMU, ToF, mic, buffers, LDO losses | 0.15 A | Allocation, replaced after schematic capture |
+| | **Design peak** | **2.4 A**, regulator 3 A | |
+| Battery input | Both rails at design peak, 90 % converter efficiency (assumed), cells at 6.0 V | 12.4 A | (5 × 11.0 + 5 × 2.4) ÷ 0.9 ÷ 6.0; eFuse limit 15 A, cells rated 35 A |
+
+Average walking current and runtime are set in Phase 6 from simulated servo current. A 20.6 Wh pack meets the 45 minute target if average power stays below about 25 W, which is 20.6 Wh × 0.9 efficiency × 60/45.
+
+### 3.3 Computer header allocation
+
+| Header pin | Function | Use |
+|---|---|---|
+| 3, 5 | UART3 RX, TX | Servo chain 1, left leg |
+| 16, 18 | UART4 RX, TX | Servo chain 2, right leg |
+| 33, 32 | UART5 RX, TX | Servo chain 3, neck and head |
+| 7, 11, 15 | GPIO | Bus direction for chains 1, 2, 3 |
+| 27, 28 | I2C4 SDA, SCL | BNO085, BQ25887 (trunk) |
+| 29, 31 | I2C5 SCL, SDA | VL53L8CX (head board, level shifted) |
+| 12, 35, 40, 38 | I2S3 SCLK, LRCK, SDO, SDI | Amplifier (SDO) and microphone (SDI), shared clocks |
+| 36 | GPIO | Torque enable (servo regulator EN) |
+| 22, 37 | GPIO | BNO085 interrupt, reset |
+| 19, 23 | GPIO | VL53L8CX interrupt, LPn |
+| 21, 24 | GPIO | Amplifier shutdown, charger interrupt |
+| 2, 4 / 6, 9, 14, 20, 25, 30, 34, 39 | 5 V / GND | Power in from the compute rail |
+
+UART2 (pins 8 and 10) remains the debug console. Pins 3 and 5 carry I2C pull-up resistors on the ZERO 3W, which is harmless for a UART because the line idles high.
 
 ## 4. Carrier board
 
@@ -69,3 +185,11 @@ To be completed in Phase 2.
 ## 5. Harness
 
 To be completed in Phase 2.
+
+## 6. Open risks
+
+| ID | Risk | Mitigation |
+|---|---|---|
+| RK5 | Radxa documents power input through USB-C only; powering the board through the header 5 V pins is common practice but not documented | Confirm against the ZERO 3W schematic before layout; fallback is a short USB-C power lead from the carrier board |
+| RK6 | Hip pitch walking demand rose to 38.4 % of stall (limit 40 %) with the 105 g cartridge | Mount the cartridge low and centred over the hip pitch axes in CAD; recheck with Fusion mass properties |
+| RK7 | Cell mass is a retailer figure | Weigh or source a manufacturer figure before the BOM is frozen |

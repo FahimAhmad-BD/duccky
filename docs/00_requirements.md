@@ -1,6 +1,6 @@
 # Duccky v1.0: Requirements and Budgets
 
-**Document:** DCK-00 · **Revision:** B · **Phase:** 0 · **Status:** Baseline for Phase 2 electrical and Phase 3 CAD
+**Document:** DCK-00 · **Revision:** C · **Phase:** 0 · **Status:** Baseline for Phase 2 electrical and Phase 3 CAD
 
 ## 1. Purpose
 
@@ -35,7 +35,7 @@ Duccky v1.0 is a digital twin of a small bipedal duck robot, designed to product
 | Parameter | Target | Phase 1 model |
 |---|---|---|
 | Overall height (nominal stance) | 25 to 30 cm | 28.1 cm |
-| Total mass | ≤ 850 g | 813 g |
+| Total mass | ≤ 850 g | 825 g |
 | Hip pitch axis height (nominal stance) | | 11.2 cm |
 | Nominal stance | Slight crouch, knee never locked | Knee 0.80 rad |
 | Runtime | ≥ 45 min mixed use | Verified in Phase 6 from simulated current |
@@ -58,32 +58,32 @@ Joint limits used in sizing (rad): hip yaw ±0.50, hip roll ±0.40, hip pitch ±
 
 | Item | Mass (g) | Basis |
 |---|---|---|
-| Servos, 6 × XC330-M288-T (hip pitch, knee, ankle) | 138 | Vendor datasheet, 23 g each |
-| Servos, 9 × XL330-M288-T (all other joints) | 162 | Vendor datasheet, 18 g each |
-| Battery, NP-F550 type 2S Li-ion pack | 85 | Allocation, confirm from pack datasheet in Phase 2 |
+| Servos, 6 × XC330-M288-T (hip pitch, knee, ankle) | 138 | ROBOTIS e-Manual, 23 g each |
+| Servos, 9 × XL330-M288-T (all other joints) | 162 | ROBOTIS e-Manual, 18 g each |
+| Battery cartridge, 2 × Molicel INR-18650-P28A in series | 105 | DCK-02 §2.3: cells about 46 g each plus 13 g board, contacts and housing |
 | Compute board | 15 | Allocation |
 | Carrier PCB and connectors | 25 | Allocation |
 | IMU and small sensors | 4 | Allocation |
-| Speaker and microphone | 12 | Allocation |
+| Speaker and microphone | 4 | DCK-02 §2.2: CMS-18132-18SP 1.9 g, T5848 and allowance |
 | Wiring harness | 20 | Allocation |
 | Fasteners, inserts and bearings (trunk) | 20 | Allocation |
 | Printed trunk structure | 85 | Allocation |
 | Printed trunk shells | 35 | Allocation |
 | Leg structure, printed, both legs | 148 | Allocation |
 | Neck, head structure, head payload, beak | 64 | Allocation |
-| **Total** | **813** | Phase 1 model, `analysis/sizing` |
+| **Total** | **825** | Sizing model, `analysis/sizing` |
 
-Allocations are replaced by Fusion mass properties in Phase 3. The budget carries 37 g of margin against the 850 g limit.
+Allocations are replaced by Fusion mass properties in Phase 3. The budget carries 25 g of margin against the 850 g limit.
 
 ## 7. Electrical baseline
 
 | Item | Baseline | Status |
 |---|---|---|
 | Servo bus | ROBOTIS Protocol 2.0 over half duplex TTL, single daisy chain per leg plus one for neck and head | XL330 and XC330 share the 20 × 34 mm footprint and the bus |
-| Servo rail | 5.0 V regulated from 2S pack | Recommended voltage for both servo models |
+| Servo rail | 5.0 V regulated from the 2S battery cartridge (DCK-02) | Recommended voltage for both servo models |
 | Servo rail sizing | Worst case simultaneous stall of the six loaded leg servos is 6 × 1.8 A = 10.8 A. The rail regulator is sized for ≥ 11 A peak; continuous rating is set in Phase 2 from simulated current profiles | Stall currents from vendor datasheets |
 | Compute rail | Separate 5 V regulator, isolated from servo transients | |
-| Protection | Pack protection board, main switch, fuse, hardware torque disable line | |
+| Protection | Cell protection in the cartridge, main switch, eFuse, hardware torque disable line | DCK-02 §3 |
 
 ## 8. Software baseline
 
@@ -93,6 +93,6 @@ Robot runtime in Python on the onboard computer, structured as a control process
 
 | ID | Risk | Mitigation |
 |---|---|---|
-| RK1 | Hip pitch walking demand is at 38 % of stall against a 40 % limit | Keep trunk payload low and centred over the hips in CAD; recheck with Fusion mass properties |
+| RK1 | Hip pitch walking demand is at 38.4 % of stall against a 40 % limit | Keep trunk payload low and centred over the hips in CAD; recheck with Fusion mass properties |
 | RK2 | The knee pass depends on the parallel assist spring (0.10 N m/rad) | Select a purchasable torsion spring in Phase 3 and model its real rate; without it the knee runs at 45 % of stall while walking |
-| RK3 | Mass allocations may grow in CAD | 37 g margin; each Phase 3 drop reruns the sizing study automatically from the exported JSON |
+| RK3 | Mass allocations may grow in CAD | 25 g margin; each Phase 3 drop reruns the sizing study automatically from the exported JSON |

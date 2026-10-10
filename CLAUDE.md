@@ -58,7 +58,7 @@ User hardware: Asus A15 laptop, Ryzen 9 8945H, 32 GB RAM, RTX 4060. Windows on t
 |---|---|---|
 | 0 | Requirements, DOF, mass and power budgets | **Done.** `docs/00_requirements.md` |
 | 1 | Sim first actuator sizing and servo selection | **Done.** `docs/01_actuator_sizing.md`, `analysis/sizing/` |
-| 2 | Electrical architecture, KiCad carrier board, harness | **In progress.** Compute selected (DCK-02 §1); next is component selection (§9 item 2) |
+| 2 | Electrical architecture, KiCad carrier board, harness | **In progress.** Items 1, 2, 3 and 7 of §9 done (DCK-02 §1 to §3, rerun at 825 g); next is the KiCad project (item 4) |
 | 3 | Mechanical CAD in Fusion with DFM rules | Planned |
 | 4 | Engineering validation: load derived FEA, tolerance stacks, range of motion and interference, thermal and power | Planned |
 | 5 | Robot description: URDF, MJCF, ROS 2 package, generated from Fusion JSON | Planned |
@@ -84,7 +84,7 @@ Each knee has a parallel assist torsion spring, 0.10 N m/rad, with its rest angl
 * Thigh 56 mm, shank 50 mm, hip lateral offset 34 mm.
 * Foot 75 × 36 × 8 mm, ankle 6 mm behind the foot centre.
 * Nominal stance: hip pitch −0.40, knee 0.80, ankle −0.40 rad.
-* Height 28.1 cm, hip pitch axis at 11.2 cm, total mass 813 g against an 850 g limit.
+* Height 28.1 cm, hip pitch axis at 11.2 cm, total mass 825 g against an 850 g limit (Phase 2 rerun, DCK-01 §9).
 
 **Pass rules:**
 1. Peak demand at or below 70 % of stall.
@@ -92,9 +92,9 @@ Each knee has a parallel assist torsion spring, 0.10 N m/rad, with its rest angl
 3. Walking demand at or below the torque available at half the peak gait joint speed.
 
 **Electrical baseline:**
-* 2S Li-ion pack, NP-F550 type, swappable without tools.
-* 5.0 V servo rail sized for at least 11 A peak (six loaded servos stalling at 1.8 A each).
-* Separate 5 V compute rail, pack protection, main switch, fuse and a hardware torque disable line.
+* Tool-free 2S cartridge: 2 × Molicel INR-18650-P28A, S-8252 cell protection, four blade contacts (B+, mid-cell, B−, NTC), 105 g, 20.6 Wh. Charged in the robot over USB-C by a BQ25887 (robot off while charging). Replaces the NP-F550 type (no datasheet), user decision 2026-10-10.
+* 5.0 V servo rail: TPS56C215 12 A buck; its EN pin is the hardware torque disable line (default off). Design peak 11.0 A.
+* 5.0 V compute rail: TPS62933 3 A buck, design peak 2.4 A. Input: main switch and TPS25982 eFuse (15 A limit). Full part list and header pin map in DCK-02 §2 and §3.
 * Servo bus: one daisy chain per leg plus one for the neck and head.
 * Sensors: wide angle camera, 8 × 8 ToF sensor, trunk IMU (head IMU optional), microphone and speaker.
 * Compute: **Radxa ZERO 3W, 4 GB RAM, 16 GB eMMC** (decided in DCK-02 §1). Raspberry Pi Zero 2W is the fallback on the same 65 × 30 mm footprint. Each servo chain gets its own UART (UART3, UART4, UART5; UART9 spare).
@@ -108,10 +108,11 @@ Each knee has a parallel assist torsion spring, 0.10 N m/rad, with its rest angl
 
 | ID | Risk | Mitigation |
 |---|---|---|
-| RK1 | Hip pitch walking demand at 38 % of stall against a 40 % limit | Keep trunk payload low and centred over the hips; rerun sizing with Fusion mass properties |
+| RK1 | Hip pitch walking demand at 38.4 % of stall against a 40 % limit | Keep trunk payload low and centred over the hips; rerun sizing with Fusion mass properties |
 | RK2 | Knee pass depends on the assist spring | Source a purchasable torsion spring in Phase 3 and model its real rate |
-| RK3 | Mass allocations may grow in CAD | 37 g margin; rerun `compare.py` from the Fusion JSON on every CAD drop |
-| RK4 | XL330 and XC330 figures came from reseller pages | Confirm against the ROBOTIS e-Manual before freezing the BOM |
+| RK3 | Mass allocations may grow in CAD | 25 g margin; rerun `compare.py` from the Fusion JSON on every CAD drop |
+| RK4 | Closed: servo figures confirmed in the ROBOTIS e-Manual (XL330 103 rpm, 26 mm deep) | |
+| RK5 to RK7 | Header back powering of the ZERO 3W, cartridge mass, cell mass source | See DCK-02 §6 |
 
 ## 8. Repository layout
 
@@ -154,7 +155,7 @@ Phase 2 comes before CAD because board size and connector placement drive the tr
    * compute regulator
    * pack protection, fuse and switch
    * connectors (JST or Molex families compatible with the servo cables)
-   * battery holder for the NP-F550 type pack
+   * battery cartridge (2S 18650, decided)
 3. **Block diagram and power tree**, with a current budget per rail.
 4. **KiCad project in `ecad/`:** schematic, carrier board PCB with an outline sized to fit the trunk, and STEP export for Fusion.
 5. **Harness definition:** every cable with endpoints, connector part numbers, wire gauge, length per segment, and service loop length sized to full joint travel.
@@ -170,6 +171,6 @@ After Phase 2 comes Phase 3: the Fusion API scripts for the leg first (one servo
 
 * Microduck runtime (Apache 2.0): https://github.com/pollen-robotics/microduck
 * Microduck RL training (Apache 2.0 code; the reference model uses XL330 servos and a BAM actuator model): https://github.com/pollen-robotics/microduck_rl
-* XL330-M288-T specs: https://www.generationrobots.com/en/403817-dynamixel-xl330-m288-t-servo-motor.html
-* XC330-M288-T specs: https://besomi.com/jo_en/xc330-m288-t-dynamixel-robx0029.html
+* XL330-M288-T e-Manual: https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/
+* XC330-M288-T e-Manual: https://emanual.robotis.com/docs/en/dxl/x/xc330-m288/
 * MuJoCo: https://github.com/google-deepmind/mujoco

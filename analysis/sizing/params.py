@@ -22,11 +22,11 @@ TRUNK = {
     "com_offset": (0.006, 0.0, 0.030),
     # Non-servo payload carried by the trunk (kg), from the mass budget
     "payload": {
-        "battery_npf550": 0.085,
+        "battery_pack": 0.105,      # 2S 18650 cartridge, DCK-02 §2
         "sbc_compute": 0.015,
         "carrier_pcb_connectors": 0.025,
         "imu_misc_sensors": 0.004,
-        "speaker_mic": 0.012,
+        "speaker_mic": 0.004,       # CMS-18132-18SP 1.9 g + mic, DCK-02 §2
         "harness": 0.020,
         "fasteners_bearings": 0.020,
         "structure_print": 0.085,
