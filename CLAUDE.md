@@ -152,7 +152,7 @@ Phase 2 is done: compute, parts, power tree, carrier board (`ecad/carrier`, rege
 
 Phase 3 deliverables:
 
-1. Install the Claude Fusion Bridge in Fusion and confirm `bash cad/tools/fusion_run.sh cad/tools/jobs/ping.py` returns a screenshot.
+1. Done 2026-10-10: the Claude Fusion Bridge is installed as a junction in `%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns\ClaudeFusionBridge` pointing at the clone, loads on Fusion startup, and passes `cad/tools/jobs/ping.py` and `geometry_test.py`. Work in scratch or Duccky documents, never in documents the user has open.
 2. Fusion API scripts in `cad/`, leg first: one servo pocket for the 20 × 34 × 26 mm envelope, idler bearing opposite each horn, heat set insert bosses, harness channels with the service loops from `analysis/harness`, knee assist torsion spring (RK2).
 3. Trunk around the carrier board STEP (`ecad/carrier/carrier.step`, 76 × 62 mm, four M2.5 standoffs on the ZERO 3W pattern) and the 2S cartridge, mounted low and centred over the hip pitch axes (RK1, RK6).
 4. Head and neck with the camera FPC routed as a clock spring around head yaw (RK8); shells with uniform walls and draft.
