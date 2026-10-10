@@ -18,7 +18,7 @@ SERVO = {
 
 TRUNK = {
     # trunk origin height is derived from STANCE so the soles sit on the floor
-    "size": (0.090, 0.080, 0.070),  # full box size x, y, z
+    "size": (0.090, 0.096, 0.070),  # full box size x, y, z (width from CAD: yaw servos at +-34 mm, cad/lib/trunk.py)
     "com_offset": (0.006, 0.0, 0.030),
     # Non-servo payload carried by the trunk (kg), from the mass budget
     "payload": {
@@ -61,18 +61,18 @@ LEG = {
 }
 
 HEAD = {
-    "neck_base": (0.022, 0.0, 0.040),  # neck pitch axis relative to trunk origin
-    "neck_len": 0.025,
-    "pitch_to_yaw": 0.014,  # head pitch axis -> head yaw axis
-    "yaw_to_roll": 0.012,   # head yaw axis -> head roll axis
+    "neck_base": (0.030, 0.0, 0.058),  # neck pitch axis relative to trunk origin (cad/lib/head.py)
+    "neck_vec": (0.038, 0.0, 0.0),        # neck link runs forward (cad/lib/head.py)
+    "pitch_to_yaw_vec": (0.0145, 0.0, 0.039),  # head pitch axis -> head yaw joint (yaw servo on the pitch case far end)
+    "yaw_to_roll_vec": (0.0, 0.0, 0.014),      # head yaw joint -> head roll axis
     "head_size": (0.070, 0.060, 0.050),
     "beak_len": 0.040,
     "m_neck": 0.012,
     "m_head_struct": 0.030,
     "m_head_payload": 0.012,  # camera, ToF, wiring
     "m_beak": 0.010,
-    "lim_neck_pitch": (-1.50, 1.00),
-    "lim_head_pitch": (-1.50, 1.50),
+    "lim_neck_pitch": (-1.50, 0.70),    # clear range from cad/build/head_skeleton.py, 0.1 rad margin
+    "lim_head_pitch": (-1.20, 1.50),    # clear range from cad/build/head_skeleton.py, 0.1 rad margin
     "lim_head_yaw": (-2.90, 2.90),
     "lim_head_roll": (-0.45, 0.45),
     "lim_beak": (0.0, 0.90),

@@ -52,6 +52,16 @@ JOINTS = {
 M = 1000.0  # m -> mm
 
 
+def _vlen(key_vec, key_scalar):
+    """Length (m) of a head offset given as a vector, or the older scalar parameter."""
+    v = H.get(key_vec)
+    return (sum(c * c for c in v) ** 0.5) if v else H[key_scalar]
+
+
+NECK_LEN, PITCH_TO_YAW, YAW_TO_ROLL = (_vlen("neck_vec", "neck_len"), _vlen("pitch_to_yaw_vec", "pitch_to_yaw"),
+                                       _vlen("yaw_to_roll_vec", "yaw_to_roll"))
+
+
 def cable(cid, frm, to, links_mm, crosses, kind, trunk=0.0, note=""):
     straight = sum(links_mm) + CONNECTOR_ALLOWANCE + trunk
     loops = {j: round(LOOP_RADIUS * JOINTS[j], 1) for j in crosses}
@@ -78,12 +88,12 @@ def build():
         ]
     out += [
         cable("N1", "carrier J11 (chain 3)", "neck pitch servo", [], [], "servo", trunk=TRUNK_RUN["neck"]),
-        cable("N2", "neck pitch servo", "head pitch servo", [H["neck_len"] * M], ["neck_pitch"], "servo"),
-        cable("N3", "head pitch servo", "head yaw servo", [H["pitch_to_yaw"] * M], ["head_pitch"], "servo"),
-        cable("N4", "head yaw servo", "head roll servo", [H["yaw_to_roll"] * M], ["head_yaw"], "servo",
+        cable("N2", "neck pitch servo", "head pitch servo", [NECK_LEN * M], ["neck_pitch"], "servo"),
+        cable("N3", "head pitch servo", "head yaw servo", [PITCH_TO_YAW * M], ["head_pitch"], "servo"),
+        cable("N4", "head yaw servo", "head roll servo", [YAW_TO_ROLL * M], ["head_yaw"], "servo",
               note="crosses head yaw (5.8 rad travel): route along the yaw axis"),
         cable("N5", "head roll servo", "beak servo", [H["beak_len"] * M / 2], ["head_roll"], "servo"),
-        cable("HB", "carrier J14", "head board", [H["neck_len"] * M, H["pitch_to_yaw"] * M, H["yaw_to_roll"] * M],
+        cable("HB", "carrier J14", "head board", [NECK_LEN * M, PITCH_TO_YAW * M, YAW_TO_ROLL * M],
               ["neck_pitch", "head_pitch", "head_yaw", "head_roll"], "head", trunk=TRUNK_RUN["head_board"],
               note="runs beside N1 to N4"),
     ]

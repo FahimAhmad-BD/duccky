@@ -11,8 +11,8 @@
 | R4 | carrier J10 (chain 2) | right knee servo | hip_yaw, hip_roll, hip_pitch | 196.7 | hip_yaw 12, hip_roll 9.6, hip_pitch 38.4 | 270 |
 | R5 | right knee servo | right ankle servo | knee | 66 | knee 27.6 | 105 |
 | N1 | carrier J11 (chain 3) | neck pitch servo | none | 80 | none | 90 |
-| N2 | neck pitch servo | head pitch servo | neck_pitch | 45 | neck_pitch 30 | 90 |
-| N3 | head pitch servo | head yaw servo | head_pitch | 34 | head_pitch 36 | 80 |
-| N4 | head yaw servo | head roll servo | head_yaw | 32 | head_yaw 69.6 | 115 |
+| N2 | neck pitch servo | head pitch servo | neck_pitch | 58 | neck_pitch 26.4 | 95 |
+| N3 | head pitch servo | head yaw servo | head_pitch | 61.6 | head_pitch 32.4 | 105 |
+| N4 | head yaw servo | head roll servo | head_yaw | 34 | head_yaw 69.6 | 115 |
 | N5 | head roll servo | beak servo | head_roll | 40 | head_roll 10.8 | 65 |
-| HB | carrier J14 | head board | neck_pitch, head_pitch, head_yaw, head_roll | 141 | neck_pitch 30, head_pitch 36, head_yaw 69.6, head_roll 10.8 | 300 |
+| HB | carrier J14 | head board | neck_pitch, head_pitch, head_yaw, head_roll | 183.6 | neck_pitch 26.4, head_pitch 32.4, head_yaw 69.6, head_roll 10.8 | 335 |

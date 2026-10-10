@@ -63,16 +63,16 @@
       "walk_peak": 0.4348,
       "peak": 0.4463,
       "static_single_support_max": 0.4463,
-      "hip_hinge_max": 0.2378,
-      "dynamic_max": 0.249,
+      "hip_hinge_max": 0.2555,
+      "dynamic_max": 0.2927,
       "speed_rad_s": 2.7489
     },
     "knee": {
       "walk_peak": 0.4948,
       "peak": 0.6456,
       "static_single_support_max": 0.6456,
-      "hip_hinge_max": 0.1002,
-      "dynamic_max": 0.5575,
+      "hip_hinge_max": 0.1142,
+      "dynamic_max": 0.513,
       "swing_spring_check": 0.0411,
       "speed_rad_s": 3.927
     },
@@ -80,22 +80,22 @@
       "walk_peak": 0.4248,
       "peak": 0.4328,
       "static_single_support_max": 0.4328,
-      "hip_hinge_max": 0.2322,
-      "dynamic_max": 0.2575,
+      "hip_hinge_max": 0.2499,
+      "dynamic_max": 0.3024,
       "speed_rad_s": 2.3562
     },
     "neck_pitch": {
-      "walk_peak": 0.0962,
-      "peak": 0.0962,
-      "static_max": 0.0962,
-      "dynamic_max": 0.0446,
+      "walk_peak": 0.1546,
+      "peak": 0.3054,
+      "static_max": 0.1546,
+      "dynamic_max": 0.3054,
       "speed_rad_s": 1.5708
     },
     "head_pitch": {
-      "walk_peak": 0.0574,
-      "peak": 0.0574,
-      "static_max": 0.0574,
-      "dynamic_max": 0.0461,
+      "walk_peak": 0.0951,
+      "peak": 0.0951,
+      "static_max": 0.0951,
+      "dynamic_max": 0.0864,
       "speed_rad_s": 2.3562
     },
     "head_yaw": {
@@ -116,7 +116,7 @@
       "walk_peak": 0.0124,
       "peak": 0.0124,
       "static_max": 0.0124,
-      "dynamic_max": 0.0026,
+      "dynamic_max": 0.0023,
       "speed_rad_s": 3.5343
     }
   }

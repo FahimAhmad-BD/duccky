@@ -64,18 +64,23 @@ def leg(side, sign, ms):
 def head(ms):
     H = P.HEAD
     hx, hy, hz = H["head_size"]
+    # Offsets are vectors (m); older scalar parameters mean a purely vertical offset
+    nv = H.get("neck_vec", (0, 0, H.get("neck_len", 0)))
+    pv = H.get("pitch_to_yaw_vec", (0, 0, H.get("pitch_to_yaw", 0)))
+    rv = H.get("yaw_to_roll_vec", (0, 0, H.get("yaw_to_roll", 0)))
+    half = lambda v: tuple(c * 0.5 for c in v)
     return f"""
     <body name="neck" pos="{f(*H['neck_base'])}">
       <joint name="neck_pitch" axis="0 1 0" range="{f(*H['lim_neck_pitch'])}"/>
-      <geom type="capsule" fromto="0 0 0 0 0 {H['neck_len']:.5g}" size="0.010" mass="{H['m_neck']}" class="struct"/>
-      {servo_geom('servo_head_pitch', (0, 0, H['neck_len']), ms('head_pitch'))}
-      <body name="head_pitch_link" pos="0 0 {H['neck_len']:.5g}">
+      <geom type="capsule" fromto="0 0 0 {f(*nv)}" size="0.010" mass="{H['m_neck']}" class="struct"/>
+      {servo_geom('servo_head_pitch', nv, ms('head_pitch'))}
+      <body name="head_pitch_link" pos="{f(*nv)}">
         <joint name="head_pitch" axis="0 1 0" range="{f(*H['lim_head_pitch'])}"/>
-        {servo_geom('servo_head_yaw', (0, 0, H['pitch_to_yaw']*0.5), ms('head_yaw'))}
-        <body name="head_yaw_link" pos="0 0 {H['pitch_to_yaw']:.5g}">
+        {servo_geom('servo_head_yaw', half(pv), ms('head_yaw'))}
+        <body name="head_yaw_link" pos="{f(*pv)}">
           <joint name="head_yaw" axis="0 0 1" range="{f(*H['lim_head_yaw'])}"/>
-          {servo_geom('servo_head_roll', (0, 0, H['yaw_to_roll']*0.5), ms('head_roll'))}
-          <body name="head" pos="0 0 {H['yaw_to_roll']:.5g}">
+          {servo_geom('servo_head_roll', half(rv), ms('head_roll'))}
+          <body name="head" pos="{f(*rv)}">
             <joint name="head_roll" axis="1 0 0" range="{f(*H['lim_head_roll'])}"/>
             <geom name="head_shell" type="ellipsoid" size="{f(hx/2, hy/2, hz/2)}" pos="0.008 0 {hz/2:.5g}"
                   mass="{H['m_head_struct'] + H['m_head_payload']:.5g}" class="body"/>

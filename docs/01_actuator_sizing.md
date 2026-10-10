@@ -125,3 +125,11 @@ The Phase 0 joint offsets were placeholders. `analysis/layout/leg_layout.py` der
 | Shank | 50 mm | 46 mm | shortened to hold height within 30 cm |
 
 The trunk origin rises 16.4 mm, so the robot stands about 29.7 cm. Configuration G still passes every rule at 825 g: hip pitch 0.358 N m walking (38.5 % of stall, peak 40 %), knee 0.286 N m walking (31 %) and 0.497 N m peak (54 %), ankle 0.344 N m walking (37 %). Hip pitch remains the joint with the least margin (RK1).
+
+## 11. Phase 3 neck and head geometry
+
+`cad/lib/head.py` places the neck and head servos, and `cad/build/head_skeleton.py` steps each pitch joint in 0.1 rad increments in Fusion until the first interference. The neck pitch servo is fixed at the trunk's front top (axis 58 mm above the hip yaw plane, over the computer). A horizontal 38 mm neck link carries the head base forward, clear of the neck servo's swept radius. The head base holds the head pitch servo, with the head yaw servo standing on its far end and the head roll servo lying on the yaw output.
+
+Stacking the head over the neck reached 321 mm overall and a 45° link still needed too much height, so the link runs forward. Clear ranges: neck pitch −1.6 to +0.7 rad (forward nod stops at the trunk front) and head pitch −1.3 to +1.6 rad. The limits are set 0.1 rad inside: neck −1.5 to +0.7, head pitch −1.2 to +1.5.
+
+Configuration G still passes: neck pitch 0.155 N m walking (30 % of stall) and 0.306 N m peak (59 %) with the head further forward; other joints are unchanged within 0.04 N m.
