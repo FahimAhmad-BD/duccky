@@ -69,7 +69,7 @@ HEAD = {
     "lim_head_pitch": (-0.80, 1.50),    # clear range from cad/build/head_skeleton.py, 0.1 rad margin
     "lim_head_yaw": (-2.90, 2.90),
     "lim_head_roll": (-0.45, 0.45),
-    "lim_beak": (0.0, 0.90),
+    "lim_beak": (0.0, 0.70),
 }
 
 # Nominal stance used as the reference pose (rad): slight crouch, standard for

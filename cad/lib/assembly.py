@@ -22,7 +22,7 @@ LEG_LINKS = {"hip_yaw": "trunk", "hip_roll": "hip_yaw_link", "hip_pitch": "hip_r
 LEG_PARTS = {"yaw_link": "hip_yaw_link", "roll_link": "hip_roll_link", "thigh": "thigh",
              "shank": "shank", "foot": "foot"}
 HEAD_SERVO_LINKS = {"neck_pitch": "trunk", "head_pitch": "head_pitch_link", "head_yaw": "head_pitch_link",
-                    "head_roll": "head_yaw_link"}
+                    "head_roll": "head_yaw_link", "beak": "head"}
 
 
 def build(root, include_board=True):
@@ -89,6 +89,7 @@ def build(root, include_board=True):
     part("head_base", lambda c: headparts.head_base(c, h), "head_pitch_link")
     part("head_yaw_link", lambda c: headparts.yaw_link(c, h), "head_yaw_link")
     part("head_shell", lambda c: headparts.head_shell(c, h), "head")
+    part("mandible", lambda c: headparts.mandible(c, h), "mandible")
 
     if include_board:
         board = robot.import_step(root, robot.CARRIER_STEP, "carrier board")

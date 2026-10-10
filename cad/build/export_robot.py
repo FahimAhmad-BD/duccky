@@ -51,6 +51,7 @@ try:
         {"name": "head_pitch", "parent": "neck_link", "child": "head_pitch_link", "origin": mm(h["x_head_pitch"], 0, h["z_head_pitch"]), "axis": [0, 1, 0]},
         {"name": "head_yaw", "parent": "head_pitch_link", "child": "head_yaw_link", "origin": mm(h["x_yaw"], 0, h["z_yaw_horn"]), "axis": [0, 0, 1]},
         {"name": "head_roll", "parent": "head_yaw_link", "child": "head", "origin": mm(h["x_yaw"], 0, h["z_roll"]), "axis": [1, 0, 0]},
+        {"name": "beak", "parent": "head", "child": "mandible", "origin": mm(h["x_beak"], 0, h["z_beak"]), "axis": [0, 1, 0]},
     ]
     P = runpy.run_path(leg.PARAMS)
     for j in joints:

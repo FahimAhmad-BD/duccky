@@ -185,15 +185,23 @@ def head_shell(comp, h, roll_range=0.45, wall=2.0):
         tools += _screw(comp, "y", (x, 0, zb + 22.5), -POCK1, -1, WALL + 4.5)
     for s in (1, -1):
         y0, y1 = sorted((s * (FACE + 1.0), s * (OUT1 + GAP)))
-        tools.append(prim.box(comp, xb - 20.0, xb + 9.0, y0, y1, sz0 - 3.0, zb + 0.5))
+        tools.append(prim.box(comp, xb - 20.0, sx1 + 2.5, y0, y1, sz0 - 3.0, zb + 10.0))   # through the front wall
     prim.cut(comp, main, tools)
     main.name = "head shell"
     return main
 
 
+# Mandible layout, from a point sampled clearance search over beak 0 to 0.7 rad combined with
+# head roll +-0.45 rad (head base keep out, head floor, roll plates, bill): everything below the
+# beak axis swings back as the beak opens, so the drop arms and the blade start well ahead of it.
+MAND_ARM = (19.0, 27.0)                # drop arm, x from the beak axis
+MAND_BLADE0 = 18.0                     # blade start, x from the beak axis
+MAND_LINK_H = 9.0                      # horn to arm link, height under the axis
+
+
 def mandible(comp, h, blade_t=3.0):
-    """Lower mandible: horn and idler plates on the beak servo, arms down to a blade that lies
-    1 mm under the upper bill and runs out to the bill tip."""
+    """Lower mandible: horn and idler plates on the beak servo, links forward through the shell
+    front notches, drop arms, and a blade 1 mm under the upper bill out to the bill tip."""
     xb, zb = h["x_beak"], h["z_beak"]
     sz0 = h["z_yaw_horn"] + 6.0                                        # head floor underside
     z_blade1 = sz0 - 2.0 - GAP                                         # under the upper bill
@@ -202,8 +210,9 @@ def mandible(comp, h, blade_t=3.0):
     for s in (1, -1):
         s0, s1 = sorted((s * OUT0, s * OUT1))
         parts.append(prim.cylinder(comp, "y", (xb, 0, zb), 9.0, s0, s1))
-        parts.append(prim.box(comp, xb - 6.0, xb + 6.0, s0, s1, z_blade0, zb))
-    parts.append(prim.box(comp, xb - 6.0, xb + BEAK_LEN, -OUT1, OUT1, z_blade0, z_blade1))
+        parts.append(prim.box(comp, xb, xb + MAND_ARM[1], s0, s1, zb - MAND_LINK_H, zb))
+        parts.append(prim.box(comp, xb + MAND_ARM[0], xb + MAND_ARM[1], s0, s1, z_blade0, zb))
+    parts.append(prim.box(comp, xb + MAND_BLADE0, xb + BEAK_LEN, -OUT1, OUT1, z_blade0, z_blade1))
     main = _union(comp, parts)
     prim.cut(comp, main, bolt_holes(comp, "y", (xb, 0, zb)))
     main.name = "mandible"

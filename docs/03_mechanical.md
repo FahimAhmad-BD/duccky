@@ -44,9 +44,9 @@ The neck pitch servo is fixed at the trunk's front top, case pointing back over 
 
 The head base holds the head pitch servo (case pointing forward) and, on a 3 mm spacer, the head yaw servo standing with its axis directly above the head pitch axis, clamped by a collar screwed into its four horn face holes. The yaw link carries the head roll servo lying along y. The head shell hangs from the roll horn and idler; its cavity is the roll servo and yaw link envelope swept over ±0.45 rad, and its underside keeps clear of the head base at every yaw and roll pose.
 
-The beak servo stands in the head front, horn end down, with its axis at the head floor. The upper bill is part of the head shell; the lower mandible hangs from the beak horn and idler and opens downward 0 to 0.9 rad.
+The beak servo stands in the head front, horn end down, with its axis at the head floor. The upper bill is part of the head shell; the lower mandible hangs from the beak horn and idler and opens downward 0 to 0.7 rad. Everything below the beak axis swings back as the beak opens, so the drop arms and the blade start 18 to 27 mm ahead of the axis and reach it through notches in the shell front corners; a sampled clearance search over beak opening combined with head roll set the 0.7 rad limit.
 
-Joint limits from the Fusion clearance search: neck pitch −1.5 to +0.7 rad, head pitch −0.8 to +1.5 rad, head yaw ±2.9 rad, head roll ±0.45 rad, beak 0 to 0.9 rad.
+Joint limits from the Fusion clearance search: neck pitch −1.5 to +0.7 rad, head pitch −0.8 to +1.5 rad, head yaw ±2.9 rad, head roll ±0.45 rad, beak 0 to 0.7 rad.
 
 ## 6. Mass
 
