@@ -23,6 +23,7 @@ for attempt in 1 2 3; do
 done
 "$KPY" pcb.py models
 "$KC" pcb export step --subst-models --include-tracks --include-zones -o "$OUT/carrier.step" "$OUT/carrier.kicad_pcb"
+"$KC" pcb export step --subst-models -o "$OUT/carrier_mech.step" "$OUT/carrier.kicad_pcb"   # light model for CAD packaging
 "$KC" pcb render --side top --width 1600 --height 1300 -o "$(cygpath -w "$OUT")\carrier_top.png" "$OUT/carrier.kicad_pcb"
 "$KC" pcb render --side top --perspective --rotate "-45,0,30" --width 1600 --height 1200 -o "$(cygpath -w "$OUT")\carrier_iso.png" "$OUT/carrier.kicad_pcb"
 grep -E "^\*\* Found|Found [0-9]+ (unconnected|schematic)" "$OUT/drc.rpt" || true
