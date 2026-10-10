@@ -21,7 +21,7 @@ FLOOR_Z0, FLOOR_Z1 = 1.0, 3.0
 BOARD_W, BOARD_H, BOARD_T = 76.0, 62.0, 1.6
 BOARD_Z = 31.0                         # board underside: yaw servo top (26) + clamp plate (3) + gap
 CELL_D, CELL_L = 18.6, 65.2            # Molicel INR-18650-P28A (retailer size, DCK-02 RK7)
-CART_WALL = 2.0
+CART_WALL = 1.5                        # 1.4 mm running gap under the trunk deck (z 26)
 TRUNK = (90.0, 80.0, 70.0)             # outer envelope from the sizing model (x, y, z)
 
 

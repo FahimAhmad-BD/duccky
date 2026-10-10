@@ -7,8 +7,8 @@ import sys
 LIB = r"F:\Drive\OneDrive\Personal Projects\Duccky\Duccky v1.0\cad\lib"
 if LIB not in sys.path:
     sys.path.insert(0, LIB)
-import dk, prim, servo, leg, legparts, robot
-for mod in (dk, prim, servo, leg, legparts, robot):
+import dk, prim, servo, leg, legparts, robot, trunk
+for mod in (dk, prim, servo, leg, legparts, robot, trunk):
     importlib.reload(mod)
 
 doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
@@ -38,6 +38,12 @@ try:
             if o.component.bRepBodies.count != 1:
                 print(f"WARNING {name}_{tag}: {o.component.bRepBodies.count} bodies")
             occ[f"{name}_{tag}"] = o
+    # Trunk frame
+    tf = dk.new_component(root, "trunk_frame")
+    tb = trunk.frame(tf.component, g["hip_y"])
+    tb.material = dk.printed_material()
+    print("trunk frame:", dk.physical(tf))
+    occ["trunk_frame"] = tf
     # Battery cartridge envelope
     cb = dk.new_component(root, "cartridge envelope")
     prim.box(cb.component, *robot.cartridge_box())
