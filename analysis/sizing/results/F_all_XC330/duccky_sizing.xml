@@ -20,9 +20,9 @@
     <body name="trunk" pos="0 0 0.15596">
       <freejoint name="root"/>
       <site name="imu" pos="0 0 0.020"/>
-      <geom name="trunk_shell" type="box" size="0.045 0.048 0.035" pos="-0.0018 0 0.0162"
-            mass="0.1964" class="body"/>
-      <geom name="battery" type="box" size="0.035 0.019 0.010" pos="-0.004 0 0.012" mass="0.1232"
+      <geom name="trunk_shell" type="box" size="0.045 0.048 0.035" pos="-0.0021 0 0.0238"
+            mass="0.1787" class="body"/>
+      <geom name="battery" type="box" size="0.035 0.019 0.010" pos="-0.004 0 0.012" mass="0.1226"
             rgba="0.2 0.4 0.8 1"/>
     <geom name="left_servo_hip_yaw" type="box" size="0.017 0.01 0.013" pos="0 0.034 0.01" mass="0.023" class="servo"/>
     <geom name="right_servo_hip_yaw" type="box" size="0.017 0.01 0.013" pos="0 -0.034 0.01" mass="0.023" class="servo"/>
@@ -38,12 +38,12 @@
         <geom name="left_servo_hip_pitch" type="box" size="0.017 0.01 0.013" pos="0 0 -0.0307" mass="0.023" class="servo"/>
         <body name="left_thigh" pos="0 0 -0.0307">
           <joint name="left_hip_pitch" axis="0 1 0" range="-1.6 1.6"/>
-          <geom type="capsule" fromto="0 0 0 0 0 -0.052" size="0.012" mass="0.0099" class="struct"/>
+          <geom type="capsule" fromto="0 0 0 0 0 -0.052" size="0.012" mass="0.0103" class="struct"/>
           <geom name="left_servo_knee" type="box" size="0.017 0.01 0.013" pos="0 0 -0.052" mass="0.023" class="servo"/>
           <site name="left_knee_site" pos="0 0 -0.052"/>
           <body name="left_shank" pos="0 0 -0.052">
             <joint name="left_knee" axis="0 1 0" range="-0.1 2.2" stiffness="0" springref="0"/>
-            <geom type="capsule" fromto="0 0 0 0 0 -0.046" size="0.011" mass="0.0141" class="struct"/>
+            <geom type="capsule" fromto="0 0 0 0 0 -0.046" size="0.011" mass="0.0153" class="struct"/>
             <geom name="left_servo_ankle" type="box" size="0.017 0.01 0.013" pos="0 0 -0.046" mass="0.023" class="servo"/>
             <body name="left_foot" pos="0 0 -0.046">
               <joint name="left_ankle" axis="0 1 0" range="-1.4 1.4"/>
@@ -67,12 +67,12 @@
         <geom name="right_servo_hip_pitch" type="box" size="0.017 0.01 0.013" pos="0 0 -0.0307" mass="0.023" class="servo"/>
         <body name="right_thigh" pos="0 0 -0.0307">
           <joint name="right_hip_pitch" axis="0 1 0" range="-1.6 1.6"/>
-          <geom type="capsule" fromto="0 0 0 0 0 -0.052" size="0.012" mass="0.0099" class="struct"/>
+          <geom type="capsule" fromto="0 0 0 0 0 -0.052" size="0.012" mass="0.0103" class="struct"/>
           <geom name="right_servo_knee" type="box" size="0.017 0.01 0.013" pos="0 0 -0.052" mass="0.023" class="servo"/>
           <site name="right_knee_site" pos="0 0 -0.052"/>
           <body name="right_shank" pos="0 0 -0.052">
             <joint name="right_knee" axis="0 1 0" range="-0.1 2.2" stiffness="0" springref="0"/>
-            <geom type="capsule" fromto="0 0 0 0 0 -0.046" size="0.011" mass="0.0141" class="struct"/>
+            <geom type="capsule" fromto="0 0 0 0 0 -0.046" size="0.011" mass="0.0153" class="struct"/>
             <geom name="right_servo_ankle" type="box" size="0.017 0.01 0.013" pos="0 0 -0.046" mass="0.023" class="servo"/>
             <body name="right_foot" pos="0 0 -0.046">
               <joint name="right_ankle" axis="0 1 0" range="-1.4 1.4"/>
@@ -99,11 +99,11 @@
           <body name="head" pos="0 0 0.0155">
             <joint name="head_roll" axis="1 0 0" range="-0.45 0.45"/>
             <geom name="head_shell" type="ellipsoid" size="0.035 0.03 0.025" pos="0.008 0 0.025"
-                  mass="0.0827" class="body"/>
+                  mass="0.0863" class="body"/>
             <geom name="servo_beak" type="box" size="0.017 0.01 0.013" pos="0.02 0 0.012" mass="0.023" class="servo"/>
             <site name="camera" pos="0.035 0 0.0325"/>
             <body name="beak" pos="0.035 0 0.014">
-              <joint name="beak" axis="0 1 0" range="0 0.9"/>
+              <joint name="beak" axis="0 1 0" range="0 0.7"/>
               <geom type="box" size="0.02 0.016 0.004" pos="0.02 0 -0.004"
                     mass="0.01" class="body"/>
             </body>

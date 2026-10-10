@@ -19,12 +19,12 @@ SERVO = {
 TRUNK = {
     # trunk origin height is derived from STANCE so the soles sit on the floor
     "size": (0.090, 0.096, 0.070),  # full box size x, y, z (width from CAD: yaw servos at +-34 mm, cad/lib/trunk.py)
-    "com_offset": (-0.0018, 0.0, 0.0162),  # trunk non-servo CoM from the CAD export (analysis/mass)
+    "com_offset": (-0.0021, 0.0, 0.0238),  # trunk non-servo CoM from the CAD export (analysis/mass)
     # Non-servo payload carried by the trunk (kg), from the CAD mass report (analysis/mass/mass_report.md):
     # printed parts and cells measured in Fusion, the rest kept as DCK-00 allocations
     "payload": {
-        "battery_pack": 0.1232,       # 2 cells (92 g) + tray and lid (30.6 g)
-        "cad_trunk_rest": 0.1964,     # trunk frame, neck mount, board, computer, sensors, harness, fasteners, shells
+        "battery_pack": 0.1226,       # 2 cells (92 g) + tray and lid (30.6 g)
+        "cad_trunk_rest": 0.1787,     # trunk frame, neck mount, board, computer, sensors, harness, fasteners, shells
     },
 }
 
@@ -39,8 +39,8 @@ LEG = {
     "foot_ankle_x": -0.006,  # ankle axis x relative to foot centre (negative: ankle 6 mm behind, foot extends forward)
     # Printed + fastener mass per link (servo mass is added separately)
     "m_hip_bracket": 0.0097,    # CAD: yaw link 6.2 g and roll link 9.2 g averaged, + 2 g idler and screws
-    "m_thigh": 0.0099,          # CAD 7.9 g + 2 g idler and screws
-    "m_shank": 0.0141,          # CAD 9.1 g + 2 g idler + 3 g knee spring (LTL048J 04)
+    "m_thigh": 0.0103,          # CAD 8.3 g + 2 g idler and screws
+    "m_shank": 0.0153,          # CAD 10.3 g + 2 g idler + 3 g knee spring (LTL048J 04)
     "m_foot": 0.0148,           # CAD 12.8 g + 2 g idler and screws
     # Parallel knee assist spring (N m/rad, rest angle = straight knee). It extends
     # the knee against gravity in stance; 0 disables it.
@@ -62,9 +62,9 @@ HEAD = {
     "head_size": (0.070, 0.060, 0.050),
     "beak_len": 0.040,
     "m_neck": 0.0109,           # CAD neck plates 6.9 g + 4 g idlers
-    "m_head_struct": 0.0707,    # CAD head shell 47.9 + head base 13.9 + yaw link 6.9 g + 2 g idler
+    "m_head_struct": 0.0743,    # CAD head shell 51.5 + head base 13.9 + yaw link 6.9 g + 2 g idler
     "m_head_payload": 0.012,  # camera, ToF, wiring
-    "m_beak": 0.010,
+    "m_beak": 0.010,             # CAD mandible 8.0 g + 2 g idler and screws
     "lim_neck_pitch": (-1.50, 0.70),    # clear range from cad/build/head_skeleton.py, 0.1 rad margin
     "lim_head_pitch": (-0.80, 1.50),    # clear range from cad/build/head_skeleton.py, 0.1 rad margin
     "lim_head_yaw": (-2.90, 2.90),

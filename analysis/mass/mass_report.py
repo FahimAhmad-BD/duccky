@@ -30,8 +30,6 @@ ALLOCATIONS = [
     ("fasteners and inserts", 0.020, "trunk", (0.0, 0.0, 0.02), "DCK-00 allocation"),
     ("idlers and horn screws, 15 joints", 0.030, "trunk", (0.0, 0.0, -0.06), "allocation 2 g per joint (FPX330-H101 mass not published)"),
     ("head payload: camera, depth and mic board", 0.012, "head", (0.08, 0.0, 0.125), "DCK-00 allocation"),
-    ("beak servo XL330-M288-T", 0.018, "head", (0.09, 0.0, 0.11), "e-Manual; beak not yet in CAD"),
-    ("beak", 0.010, "head", (0.11, 0.0, 0.105), "DCK-00 allocation; beak not yet in CAD"),
     ("outer shells", 0.035, "trunk", (0.0, 0.0, 0.04), "DCK-00 allocation; shells not yet in CAD"),
 ]
 

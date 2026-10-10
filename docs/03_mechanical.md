@@ -50,14 +50,28 @@ Joint limits from the Fusion clearance search: neck pitch −1.5 to +0.7 rad, he
 
 ## 6. Mass
 
-To be completed from the final export (`analysis/mass/mass_report.md`).
+From the Fusion export (`cad/export/robot.json`, 38 parts, 15 joints) through `analysis/mass/mass_report.py`. Printed parts use PETG at 1.27 g/cm³ with a 1.2 mm solid skin and 25 % infill; most parts are thin enough to be solid. Servo masses are the e-Manual figures, the cells the retailer figure. Items not yet in CAD keep their DCK-00 and DCK-02 allocations.
+
+| Group | Mass (g) |
+|---|---|
+| Servos (15) | 300 |
+| Printed parts | 267 |
+| Allocations (board, computer, sensors, harness, fasteners, idlers, head payload, outer shells) | 165 |
+| Cells | 92 |
+| Knee springs | 6 |
+| **Total** | **831** |
+
+The total is 831 g against the 850 g limit, a 19 g margin. The centre of mass is 17.3 mm ahead of the hip yaw axes, on the centreline and 2.7 mm above the hip yaw horn faces. The heaviest printed parts are the head shell (51.5 g) and the trunk frame (47.5 g).
+
+With these masses in `analysis/sizing/params.py`, configuration G still passes every rule (`analysis/sizing/results/compare.md`). Hip pitch walking demand is 0.362 N m, 38.9 % of the XC330 stall torque against the 40 % limit (39.6 % before the trunk and head were lightened). RK1 stays open as a watch item: any growth in trunk or head mass, the outer shells above all, must be checked with `compare.py` before release.
 
 ## 7. Open items
 
 | Item | Status |
 |---|---|
-| Outer shells | Allocated (35 g), not yet modelled |
+| Outer shells | Allocated (35 g), not yet modelled; RK1 limits their growth |
 | Head board (VL53L8CX, T5848) | Waiting for datasheets (DCK-02 RK9) |
 | Camera mount and FPC clock spring around head yaw | DCK-02 RK8 |
 | XT30 connector body | Not in KiCad's library; to be modelled |
+| Master STEP export | `save_master.py` writes an empty STEP after the cloud save; the f3d archive is the backup until fixed |
 | Fillets, chamfers, print orientation, insert bosses | DFM pass before Phase 8 |
