@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Send a Python job to the DucckyBridge add-in in Fusion and print its result.
+# Send a Python job to the Claude Fusion Bridge add-in in Fusion and print its result.
 # Usage: fusion_run.sh <job.py> [timeout_seconds]
 # The job is copied into the bridge inbox under a unique name; the script waits
 # for the matching JSON in the outbox and prints it. Exit code 1 if the job failed.
@@ -11,7 +11,7 @@ bridge="${USERPROFILE:-$HOME}/Documents/ClaudeFusion/bridge"
 bridge="${bridge//\\//}"
 
 if [ ! -f "$bridge/status.json" ]; then
-  echo "Bridge not found at $bridge. Is Fusion running with DucckyBridge?" >&2
+  echo "Bridge not found at $bridge. Is Fusion running with the Claude Fusion Bridge add-in?" >&2
   exit 2
 fi
 
