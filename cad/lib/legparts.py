@@ -155,6 +155,7 @@ def thigh(comp, g):
         parts.append(prim.box(comp, -POCK1, POCK1, s * FACE, s * POCK1, block_bot, top_far + 3.0))
         parts.append(prim.box(comp, -PLATE_R, PLATE_R, s * POCK1, s * OUT1, block_bot, top_far + 3.0))
     parts.append(prim.box(comp, -POCK1, -servo.W / 2, -FACE, FACE, block_bot, top_far + 3.0))   # back web
+    parts += thigh_spring_features(comp, g)
     main = _union(comp, parts)
     tools = bolt_holes(comp, "y", (0, 0, zp))
     # Keep the thigh outside the pitch servo and roll link swept radius
@@ -184,6 +185,7 @@ def shank(comp, g):
     web_top = zk - 12.5
     web_bot = max(zk - 18.5, za + SERVO_FAR_R + GAP)
     parts.append(prim.box(comp, rail, rail + T, -OUT1, OUT1, web_bot, web_top))
+    parts += shank_spring_features(comp, g)
     main = _union(comp, parts)
     tools = bolt_holes(comp, "y", (0, 0, zk)) + bolt_holes(comp, "y", (0, 0, za))
     # Back web must not cross the servo bodies between the side plates
@@ -213,3 +215,45 @@ def foot(comp, g):
     prim.cut(comp, main, tools)
     main.name = "foot"
     return main
+
+
+# ---------------------------------------------------------------- knee assist spring (RK2)
+# Lee Spring LTL048J 04 / LTR048J 04, music wire: OD 15.72 mm, wire 1.22 mm, body length
+# 7.42 mm, suggested mandrel 11.51 mm, 31.68 kg mm at 180 deg (0.0989 N m/rad). It sits on
+# the inner (idler) side of the knee, coaxial with the knee axis, around a mandrel boss on the
+# shank; its legs bear on a shank peg and on a thigh peg in front of the knee.
+SPRING_OD, SPRING_WIRE, SPRING_L, SPRING_MANDREL = 15.72, 1.22, 7.42, 11.51
+
+
+def _spring_slab():
+    s0 = -(OUT1 + 0.5)
+    return s0 - SPRING_L, s0                          # y range on the inner side of the left leg
+
+
+def knee_spring(comp, g):
+    """Reference body: the spring coil as a tube (for mass and interference)."""
+    zk = g["z_knee"]
+    y0, y1 = _spring_slab()
+    outer = prim.cylinder(comp, "y", (0, 0, zk), SPRING_OD / 2, y0, y1)
+    inner = prim.cylinder(comp, "y", (0, 0, zk), SPRING_OD / 2 - SPRING_WIRE, y0 - 0.5, y1 + 0.5)
+    prim.cut(comp, outer, [inner])
+    outer.name = "knee spring LTx048J04"
+    return outer
+
+
+def shank_spring_features(comp, g):
+    """Mandrel boss and the shank-side leg peg (joined to the shank)."""
+    zk = g["z_knee"]
+    y0, y1 = _spring_slab()
+    boss = prim.cylinder(comp, "y", (0, 0, zk), SPRING_MANDREL / 2, y0 - 0.5, -OUT1 + 0.01)
+    peg = prim.cylinder(comp, "y", (0, 0, zk - 14.0), 1.5, y0 - 0.5, -OUT1 + 0.01)
+    return [boss, peg]
+
+
+def thigh_spring_features(comp, g):
+    """Tab down from the thigh's inner arm in front of the knee and the thigh-side leg peg."""
+    zk = g["z_knee"]
+    y0, y1 = _spring_slab()
+    tab = prim.box(comp, 6.0, 14.0, -OUT1, -OUT0, zk + PLATE_R + GAP, zk + 20.0 + 0.01)
+    peg = prim.cylinder(comp, "y", (10.0, 0, zk + 13.0), 1.5, y0 - 0.5, -OUT0)
+    return [tab, peg]

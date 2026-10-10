@@ -19,18 +19,12 @@ SERVO = {
 TRUNK = {
     # trunk origin height is derived from STANCE so the soles sit on the floor
     "size": (0.090, 0.096, 0.070),  # full box size x, y, z (width from CAD: yaw servos at +-34 mm, cad/lib/trunk.py)
-    "com_offset": (0.006, 0.0, 0.030),
-    # Non-servo payload carried by the trunk (kg), from the mass budget
+    "com_offset": (-0.0018, 0.0, 0.0162),  # trunk non-servo CoM from the CAD export (analysis/mass)
+    # Non-servo payload carried by the trunk (kg), from the CAD mass report (analysis/mass/mass_report.md):
+    # printed parts and cells measured in Fusion, the rest kept as DCK-00 allocations
     "payload": {
-        "battery_pack": 0.105,      # 2S 18650 cartridge, DCK-02 §2
-        "sbc_compute": 0.015,
-        "carrier_pcb_connectors": 0.025,
-        "imu_misc_sensors": 0.004,
-        "speaker_mic": 0.004,       # CMS-18132-18SP 1.9 g + mic, DCK-02 §2
-        "harness": 0.020,
-        "fasteners_bearings": 0.020,
-        "structure_print": 0.085,
-        "shell_print": 0.035,
+        "battery_pack": 0.1232,       # 2 cells (92 g) + tray and lid (30.6 g)
+        "cad_trunk_rest": 0.1964,     # trunk frame, neck mount, board, computer, sensors, harness, fasteners, shells
     },
 }
 
@@ -44,10 +38,10 @@ LEG = {
     "foot": (0.075, 0.036, 0.008),  # sole box full size
     "foot_ankle_x": -0.006,  # ankle axis x relative to foot centre (negative: ankle 6 mm behind, foot extends forward)
     # Printed + fastener mass per link (servo mass is added separately)
-    "m_hip_bracket": 0.008,
-    "m_thigh": 0.022,
-    "m_shank": 0.016,
-    "m_foot": 0.020,
+    "m_hip_bracket": 0.0097,    # CAD: yaw link 6.2 g and roll link 9.2 g averaged, + 2 g idler and screws
+    "m_thigh": 0.0099,          # CAD 7.9 g + 2 g idler and screws
+    "m_shank": 0.0141,          # CAD 9.1 g + 2 g idler + 3 g knee spring (LTL048J 04)
+    "m_foot": 0.0148,           # CAD 12.8 g + 2 g idler and screws
     # Parallel knee assist spring (N m/rad, rest angle = straight knee). It extends
     # the knee against gravity in stance; 0 disables it.
     "knee_spring_k": 0.0,
@@ -67,8 +61,8 @@ HEAD = {
     "yaw_to_roll_vec": (0.0, 0.0, 0.0155),     # head yaw joint -> head roll axis (cad/lib/head.py)
     "head_size": (0.070, 0.060, 0.050),
     "beak_len": 0.040,
-    "m_neck": 0.012,
-    "m_head_struct": 0.030,
+    "m_neck": 0.0109,           # CAD neck plates 6.9 g + 4 g idlers
+    "m_head_struct": 0.0707,    # CAD head shell 47.9 + head base 13.9 + yaw link 6.9 g + 2 g idler
     "m_head_payload": 0.012,  # camera, ToF, wiring
     "m_beak": 0.010,
     "lim_neck_pitch": (-1.50, 0.70),    # clear range from cad/build/head_skeleton.py, 0.1 rad margin

@@ -1,0 +1,579 @@
+{
+  "assumptions": {
+    "rho_kg_m3": 1270.0,
+    "skin_m": 0.0012,
+    "infill": 0.25
+  },
+  "total_kg": 0.8377308408556293,
+  "com_m": [
+    0.016141499959964226,
+    0.00040742124654576106,
+    0.0038002847313389422
+  ],
+  "margin_kg": 0.012269159144370656,
+  "by_kind_kg": {
+    "servo": 0.282,
+    "printed": 0.2707308408556294,
+    "cell": 0.092,
+    "allocation": 0.193
+  },
+  "by_link_kg": {
+    "trunk": 0.40359888140982125,
+    "L_hip_yaw_link": 0.02417331896176114,
+    "L_hip_roll_link": 0.03215312140698607,
+    "L_thigh": 0.03092952547742763,
+    "L_foot": 0.03584103441902016,
+    "L_shank": 0.009128001861392369,
+    "R_hip_yaw_link": 0.02417331896176114,
+    "R_hip_roll_link": 0.032153121406986056,
+    "R_thigh": 0.03092952547742763,
+    "R_foot": 0.03584103441902016,
+    "R_shank": 0.009128001861392369,
+    "head_pitch_link": 0.0499368103649499,
+    "head_yaw_link": 0.02494430116040711,
+    "neck_link": 0.006917080372678867,
+    "head": 0.08788376329459752
+  },
+  "rows": [
+    {
+      "name": "servo_hip_yaw_L",
+      "kind": "servo",
+      "link": "trunk",
+      "mass_kg": 0.018,
+      "solid_kg": 0.018,
+      "com_m": [
+        -0.007231232896641027,
+        0.03400000000003079,
+        0.014028351062369358
+      ]
+    },
+    {
+      "name": "servo_hip_roll_L",
+      "kind": "servo",
+      "link": "L_hip_yaw_link",
+      "mass_kg": 0.018,
+      "solid_kg": 0.018,
+      "com_m": [
+        0.0004716489376306421,
+        0.026768767103358973,
+        -0.014000000000030788
+      ]
+    },
+    {
+      "name": "servo_hip_pitch_L",
+      "kind": "servo",
+      "link": "L_hip_roll_link",
+      "mass_kg": 0.023000000000000003,
+      "solid_kg": 0.023000000000000003,
+      "com_m": [
+        -3.078965503405239e-14,
+        0.03447164893763064,
+        -0.05193123289664103
+      ]
+    },
+    {
+      "name": "servo_knee_L",
+      "kind": "servo",
+      "link": "L_thigh",
+      "mass_kg": 0.023000000000000003,
+      "solid_kg": 0.023000000000000003,
+      "com_m": [
+        3.078965503405239e-14,
+        0.03447164893763064,
+        -0.08946876710335896
+      ]
+    },
+    {
+      "name": "servo_ankle_L",
+      "kind": "servo",
+      "link": "L_foot",
+      "mass_kg": 0.023000000000000003,
+      "solid_kg": 0.023000000000000003,
+      "com_m": [
+        0.007231232896641028,
+        0.03447164893763064,
+        -0.14270000000003077
+      ]
+    },
+    {
+      "name": "yaw_link_L",
+      "kind": "printed",
+      "link": "L_hip_yaw_link",
+      "mass_kg": 0.00617331896176114,
+      "solid_kg": 0.006173318961761139,
+      "com_m": [
+        -1.903938606131334e-15,
+        0.019332024523968393,
+        -0.006690277655024589
+      ]
+    },
+    {
+      "name": "roll_link_L",
+      "kind": "printed",
+      "link": "L_hip_roll_link",
+      "mass_kg": 0.009153121406986065,
+      "solid_kg": 0.009153121406986065,
+      "com_m": [
+        -1.5854452783106385e-13,
+        0.034000000000000016,
+        -0.04241215766763656
+      ]
+    },
+    {
+      "name": "thigh_L",
+      "kind": "printed",
+      "link": "L_thigh",
+      "mass_kg": 0.007929525477427628,
+      "solid_kg": 0.007929525477427628,
+      "com_m": [
+        -0.0010823321285429726,
+        0.034,
+        -0.06031698212952749
+      ]
+    },
+    {
+      "name": "shank_L",
+      "kind": "printed",
+      "link": "L_shank",
+      "mass_kg": 0.009128001861392369,
+      "solid_kg": 0.009128001861392369,
+      "com_m": [
+        0.0009203602417617512,
+        0.033999999999999996,
+        -0.1177298257931457
+      ]
+    },
+    {
+      "name": "foot_L",
+      "kind": "printed",
+      "link": "L_foot",
+      "mass_kg": 0.01284103441902016,
+      "solid_kg": 0.012981247374986233,
+      "com_m": [
+        0.009193674728606964,
+        0.034,
+        -0.1518128978072507
+      ]
+    },
+    {
+      "name": "servo_hip_yaw_R",
+      "kind": "servo",
+      "link": "trunk",
+      "mass_kg": 0.018,
+      "solid_kg": 0.018,
+      "com_m": [
+        -0.007231232896641027,
+        -0.03399999999996921,
+        0.014028351062369358
+      ]
+    },
+    {
+      "name": "servo_hip_roll_R",
+      "kind": "servo",
+      "link": "R_hip_yaw_link",
+      "mass_kg": 0.018,
+      "solid_kg": 0.018,
+      "com_m": [
+        0.0004716489376306421,
+        -0.026768767103358973,
+        -0.01399999999996921
+      ]
+    },
+    {
+      "name": "servo_hip_pitch_R",
+      "kind": "servo",
+      "link": "R_hip_roll_link",
+      "mass_kg": 0.023000000000000003,
+      "solid_kg": 0.023000000000000003,
+      "com_m": [
+        3.078965503405239e-14,
+        -0.03447164893763064,
+        -0.05193123289664103
+      ]
+    },
+    {
+      "name": "servo_knee_R",
+      "kind": "servo",
+      "link": "R_thigh",
+      "mass_kg": 0.023000000000000003,
+      "solid_kg": 0.023000000000000003,
+      "com_m": [
+        -3.078965503405239e-14,
+        -0.03447164893763064,
+        -0.08946876710335896
+      ]
+    },
+    {
+      "name": "servo_ankle_R",
+      "kind": "servo",
+      "link": "R_foot",
+      "mass_kg": 0.023000000000000003,
+      "solid_kg": 0.023000000000000003,
+      "com_m": [
+        0.007231232896641028,
+        -0.03447164893763064,
+        -0.1426999999999692
+      ]
+    },
+    {
+      "name": "yaw_link_R",
+      "kind": "printed",
+      "link": "R_hip_yaw_link",
+      "mass_kg": 0.00617331896176114,
+      "solid_kg": 0.006173318961761139,
+      "com_m": [
+        -1.9112473915675385e-15,
+        -0.019332024523968386,
+        -0.006690277655024589
+      ]
+    },
+    {
+      "name": "roll_link_R",
+      "kind": "printed",
+      "link": "R_hip_roll_link",
+      "mass_kg": 0.009153121406986054,
+      "solid_kg": 0.009153121406986054,
+      "com_m": [
+        -1.5852973960908555e-13,
+        -0.03399999999999999,
+        -0.042412157667636556
+      ]
+    },
+    {
+      "name": "thigh_R",
+      "kind": "printed",
+      "link": "R_thigh",
+      "mass_kg": 0.007929525477427628,
+      "solid_kg": 0.007929525477427628,
+      "com_m": [
+        -0.0010823321285429726,
+        -0.03399999999999999,
+        -0.06031698212952749
+      ]
+    },
+    {
+      "name": "shank_R",
+      "kind": "printed",
+      "link": "R_shank",
+      "mass_kg": 0.009128001861392369,
+      "solid_kg": 0.009128001861392369,
+      "com_m": [
+        0.0009203602417617512,
+        -0.034,
+        -0.1177298257931457
+      ]
+    },
+    {
+      "name": "foot_R",
+      "kind": "printed",
+      "link": "R_foot",
+      "mass_kg": 0.01284103441902016,
+      "solid_kg": 0.012981247374986233,
+      "com_m": [
+        0.009193674728606964,
+        -0.034,
+        -0.1518128978072507
+      ]
+    },
+    {
+      "name": "trunk_frame",
+      "kind": "printed",
+      "link": "trunk",
+      "mass_kg": 0.06576452475783189,
+      "solid_kg": 0.06576452475783189,
+      "com_m": [
+        -0.00020145634352693853,
+        4.802345796371516e-05,
+        0.016940153340993996
+      ]
+    },
+    {
+      "name": "cartridge_tray",
+      "kind": "printed",
+      "link": "trunk",
+      "mass_kg": 0.015148368905823805,
+      "solid_kg": 0.015148368905823805,
+      "com_m": [
+        -0.005688071981640223,
+        8.935509295014621e-18,
+        0.00619188078660457
+      ]
+    },
+    {
+      "name": "cartridge_lid",
+      "kind": "printed",
+      "link": "trunk",
+      "mass_kg": 0.015492792905823801,
+      "solid_kg": 0.015492792905823801,
+      "com_m": [
+        -0.005752325748010621,
+        -1.4561436403053505e-17,
+        0.021339848162566562
+      ]
+    },
+    {
+      "name": "cells",
+      "kind": "cell",
+      "link": "trunk",
+      "mass_kg": 0.092,
+      "solid_kg": 0.2781397230900856,
+      "com_m": [
+        -0.006999999999999995,
+        0.0,
+        0.013800000001944968
+      ]
+    },
+    {
+      "name": "servo_neck_pitch",
+      "kind": "servo",
+      "link": "trunk",
+      "mass_kg": 0.018,
+      "solid_kg": 0.018,
+      "com_m": [
+        0.022768767103358973,
+        0.0004716489376306421,
+        0.05800000000003079
+      ]
+    },
+    {
+      "name": "servo_head_pitch",
+      "kind": "servo",
+      "link": "head_pitch_link",
+      "mass_kg": 0.018,
+      "solid_kg": 0.018,
+      "com_m": [
+        0.07523123289664102,
+        0.0004716489376306421,
+        0.05799999999996921
+      ]
+    },
+    {
+      "name": "servo_head_yaw",
+      "kind": "servo",
+      "link": "head_pitch_link",
+      "mass_kg": 0.018,
+      "solid_kg": 0.018,
+      "com_m": [
+        0.07523123289664102,
+        3.0791853666945426e-14,
+        0.08297164893763063
+      ]
+    },
+    {
+      "name": "servo_head_roll",
+      "kind": "servo",
+      "link": "head_yaw_link",
+      "mass_kg": 0.018,
+      "solid_kg": 0.018,
+      "com_m": [
+        0.06847164893763065,
+        0.007231232896641027,
+        0.11250000000003078
+      ]
+    },
+    {
+      "name": "neck_mount",
+      "kind": "printed",
+      "link": "trunk",
+      "mass_kg": 0.008193194840341715,
+      "solid_kg": 0.008193194840341715,
+      "com_m": [
+        0.008039733289168946,
+        0.0,
+        0.060222020878883516
+      ]
+    },
+    {
+      "name": "neck_plate_horn",
+      "kind": "printed",
+      "link": "neck_link",
+      "mass_kg": 0.0034585401863394334,
+      "solid_kg": 0.003458540186339433,
+      "com_m": [
+        0.04899999999999318,
+        0.016,
+        0.057999999999999996
+      ]
+    },
+    {
+      "name": "neck_plate_idler",
+      "kind": "printed",
+      "link": "neck_link",
+      "mass_kg": 0.0034585401863394334,
+      "solid_kg": 0.003458540186339433,
+      "com_m": [
+        0.04899999999999318,
+        -0.016,
+        0.057999999999999996
+      ]
+    },
+    {
+      "name": "head_base",
+      "kind": "printed",
+      "link": "head_pitch_link",
+      "mass_kg": 0.013936810364949904,
+      "solid_kg": 0.013936810364949904,
+      "com_m": [
+        0.08133139491160246,
+        4.856146694178888e-18,
+        0.0751316720367359
+      ]
+    },
+    {
+      "name": "head_yaw_link",
+      "kind": "printed",
+      "link": "head_yaw_link",
+      "mass_kg": 0.00694430116040711,
+      "solid_kg": 0.006944301160407109,
+      "com_m": [
+        0.06800000000005477,
+        0.012604950320400807,
+        0.10448496759869241
+      ]
+    },
+    {
+      "name": "head_shell",
+      "kind": "printed",
+      "link": "head",
+      "mass_kg": 0.047883763294597516,
+      "solid_kg": 0.04798262428964682,
+      "com_m": [
+        0.08079046249183972,
+        -3.1806636883373385e-05,
+        0.12827075319130782
+      ]
+    },
+    {
+      "name": "carrier PCB and connectors",
+      "kind": "allocation",
+      "link": "trunk",
+      "mass_kg": 0.025,
+      "com_m": [
+        0.0,
+        0.0,
+        0.033
+      ],
+      "basis": "DCK-00 allocation"
+    },
+    {
+      "name": "Radxa ZERO 3W",
+      "kind": "allocation",
+      "link": "trunk",
+      "mass_kg": 0.015,
+      "com_m": [
+        0.0,
+        0.015,
+        0.04
+      ],
+      "basis": "DCK-00 allocation (no Radxa figure, DCK-02 1.5)"
+    },
+    {
+      "name": "IMU and small sensors",
+      "kind": "allocation",
+      "link": "trunk",
+      "mass_kg": 0.004,
+      "com_m": [
+        0.0,
+        0.0,
+        0.034
+      ],
+      "basis": "DCK-00 allocation"
+    },
+    {
+      "name": "speaker and microphone",
+      "kind": "allocation",
+      "link": "trunk",
+      "mass_kg": 0.004,
+      "com_m": [
+        0.03,
+        -0.03,
+        0.05
+      ],
+      "basis": "DCK-02 2.2"
+    },
+    {
+      "name": "wiring harness",
+      "kind": "allocation",
+      "link": "trunk",
+      "mass_kg": 0.02,
+      "com_m": [
+        0.0,
+        0.0,
+        0.03
+      ],
+      "basis": "DCK-00 allocation"
+    },
+    {
+      "name": "fasteners and inserts",
+      "kind": "allocation",
+      "link": "trunk",
+      "mass_kg": 0.02,
+      "com_m": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "basis": "DCK-00 allocation"
+    },
+    {
+      "name": "idlers and horn screws, 15 joints",
+      "kind": "allocation",
+      "link": "trunk",
+      "mass_kg": 0.03,
+      "com_m": [
+        0.0,
+        0.0,
+        -0.06
+      ],
+      "basis": "allocation 2 g per joint (FPX330-H101 mass not published)"
+    },
+    {
+      "name": "head payload: camera, depth and mic board",
+      "kind": "allocation",
+      "link": "head",
+      "mass_kg": 0.012,
+      "com_m": [
+        0.08,
+        0.0,
+        0.125
+      ],
+      "basis": "DCK-00 allocation"
+    },
+    {
+      "name": "beak servo XL330-M288-T",
+      "kind": "allocation",
+      "link": "head",
+      "mass_kg": 0.018,
+      "com_m": [
+        0.09,
+        0.0,
+        0.11
+      ],
+      "basis": "e-Manual; beak not yet in CAD"
+    },
+    {
+      "name": "beak",
+      "kind": "allocation",
+      "link": "head",
+      "mass_kg": 0.01,
+      "com_m": [
+        0.11,
+        0.0,
+        0.105
+      ],
+      "basis": "DCK-00 allocation; beak not yet in CAD"
+    },
+    {
+      "name": "outer shells",
+      "kind": "allocation",
+      "link": "trunk",
+      "mass_kg": 0.035,
+      "com_m": [
+        0.0,
+        0.0,
+        0.04
+      ],
+      "basis": "DCK-00 allocation; shells not yet in CAD"
+    }
+  ]
+}

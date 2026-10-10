@@ -28,6 +28,8 @@ from legparts import (CBORE_D, CBORE_H, FACE, GAP, HUB_CLEAR, OUT0, OUT1, PLATE_
                       SCREW_D, T, WALL, _screw, _union, bolt_holes, output_plates)
 
 TRUNK_TOP = 72.0
+BEAK_LEN = 52.0                        # bill tip ahead of the beak axis
+BILL_HALF_W = 14.0                     # upper bill half width
 SIDE_Y0, SIDE_Y1 = 45.5, 48.0          # trunk side walls (trunk.py)
 
 
@@ -140,7 +142,7 @@ def _rotate_x(comp, b, axis_point, angle):
     return b
 
 
-def head_shell(comp, h, roll_range=0.45, wall=2.5):
+def head_shell(comp, h, roll_range=0.45, wall=2.0):
     """Horn and idler plates on the roll servo and a box shell around it. The cavity is the roll
     servo plus yaw link envelope swept over the roll range (five poses), plus GAP."""
     xy, zr = h["x_yaw"], h["z_roll"]
@@ -151,13 +153,20 @@ def head_shell(comp, h, roll_range=0.45, wall=2.5):
     # Outer shell: bounds of the swept envelope plus the wall
     reach = max(math.hypot(yy, zz - zr) for yy in (env[2], env[3]) for zz in (env[4], env[5]))
     top = zr + reach * 1.0 + wall
-    sx0, sx1 = xy - OUT1, xy + OUT1 + 22.0
+    sx0, sx1 = xy - OUT1, h["x_beak"] + servo.W / 2 + GAP + wall          # front wall ahead of the beak servo
     sy, sz0 = reach + wall, h["z_yaw_horn"] + 6.0
     shell = prim.box(comp, sx0, sx1, -sy, sy, sz0, top)
     # Hollow to a uniform wall, then add the roll plates and their arms down to the bottom wall
     inner = prim.box(comp, sx0 + wall, sx1 - wall, -sy + wall, sy - wall, sz0 + wall, top - wall)
     prim.cut(comp, shell, [inner])
     parts = output_plates(comp, "x", (xy, 0, zr), PLATE_R, sz0, PLATE_R)
+    # Beak servo pocket: walls on its y faces from above the hub zone up to the shell top, and
+    # the fixed upper bill ahead of the head floor
+    xb, zb = h["x_beak"], h["z_beak"]
+    for s in (1, -1):
+        parts.append(prim.box(comp, xb - servo.W / 2, xb + servo.W / 2, s * FACE, s * POCK1,
+                              zb + HUB_CLEAR + GAP, top - wall + 0.01))
+    parts.append(prim.box(comp, sx1 - wall, xb + BEAK_LEN, -BILL_HALF_W, BILL_HALF_W, sz0 - 2.0, sz0 + wall + 4.0))
     main = _union(comp, [shell] + parts)
     tools = []
     for k in range(5):
@@ -170,6 +179,32 @@ def head_shell(comp, h, roll_range=0.45, wall=2.5):
         cyl = prim.cylinder(comp, "z", (xy, 0, 0), base_r, h["z_yaw_horn"] - 40.0, z_clear)
         tools.append(_rotate_x(comp, cyl, (xy, 0, zr), -roll_range + k * roll_range / 2))
     tools += bolt_holes(comp, "x", (xy, 0, zr))
+    # Beak pocket screws (far end, at the top) and the slot the mandible arms swing through
+    for x in (xb + servo.CASE_DX / 2, xb - servo.CASE_DX / 2):
+        tools += _screw(comp, "y", (x, 0, zb + 22.5), POCK1, 1, WALL + 3.0)
+        tools += _screw(comp, "y", (x, 0, zb + 22.5), -POCK1, -1, WALL + 4.5)
+    for s in (1, -1):
+        y0, y1 = sorted((s * (FACE + 1.0), s * (OUT1 + GAP)))
+        tools.append(prim.box(comp, xb - 20.0, xb + 9.0, y0, y1, sz0 - 3.0, zb + 0.5))
     prim.cut(comp, main, tools)
     main.name = "head shell"
+    return main
+
+
+def mandible(comp, h, blade_t=3.0):
+    """Lower mandible: horn and idler plates on the beak servo, arms down to a blade that lies
+    1 mm under the upper bill and runs out to the bill tip."""
+    xb, zb = h["x_beak"], h["z_beak"]
+    sz0 = h["z_yaw_horn"] + 6.0                                        # head floor underside
+    z_blade1 = sz0 - 2.0 - GAP                                         # under the upper bill
+    z_blade0 = z_blade1 - blade_t
+    parts = []
+    for s in (1, -1):
+        s0, s1 = sorted((s * OUT0, s * OUT1))
+        parts.append(prim.cylinder(comp, "y", (xb, 0, zb), 9.0, s0, s1))
+        parts.append(prim.box(comp, xb - 6.0, xb + 6.0, s0, s1, z_blade0, zb))
+    parts.append(prim.box(comp, xb - 6.0, xb + BEAK_LEN, -OUT1, OUT1, z_blade0, z_blade1))
+    main = _union(comp, parts)
+    prim.cut(comp, main, bolt_holes(comp, "y", (xb, 0, zb)))
+    main.name = "mandible"
     return main

@@ -28,7 +28,8 @@ try:
                 "neck_plate_idler": lambda c: headparts.neck_plate(c, h, -1),
                 "head_base": lambda c: headparts.head_base(c, h),
                 "yaw_link": lambda c: headparts.yaw_link(c, h),
-                "head_shell": lambda c: headparts.head_shell(c, h)}
+                "head_shell": lambda c: headparts.head_shell(c, h),
+                "mandible": lambda c: headparts.mandible(c, h)}
     for name, fn in builders.items():
         o = dk.new_component(root, name)
         fn(o.component)
@@ -52,17 +53,18 @@ try:
     HP = runpy.run_path(leg.PARAMS)["HEAD"]
     base = {k: occ[k].transform.copy() for k in occ}
     chain = {
-        "neck_pitch": (("y", (h["x_neck"], 0, h["z_neck"])), ["neck_plate_horn", "neck_plate_idler", "head_pitch", "head_base", "head_yaw", "yaw_link", "head_roll", "head_shell"]),
-        "head_pitch": (("y", (h["x_head_pitch"], 0, h["z_head_pitch"])), ["head_pitch", "head_base", "head_yaw", "yaw_link", "head_roll", "head_shell"]),
-        "head_yaw": (("z", (h["x_yaw"], 0, 0)), ["yaw_link", "head_roll", "head_shell"]),
-        "head_roll": (("x", (0, 0, h["z_roll"])), ["head_shell"]),
+        "neck_pitch": (("y", (h["x_neck"], 0, h["z_neck"])), ["neck_plate_horn", "neck_plate_idler", "head_pitch", "head_base", "head_yaw", "yaw_link", "head_roll", "head_shell", "beak", "mandible"]),
+        "head_pitch": (("y", (h["x_head_pitch"], 0, h["z_head_pitch"])), ["head_pitch", "head_base", "head_yaw", "yaw_link", "head_roll", "head_shell", "beak", "mandible"]),
+        "head_yaw": (("z", (h["x_yaw"], 0, 0)), ["yaw_link", "head_roll", "head_shell", "beak", "mandible"]),
+        "head_roll": (("x", (0, 0, h["z_roll"])), ["head_shell", "beak", "mandible"]),
+        "beak": (("y", (h["x_beak"], 0, h["z_beak"])), ["mandible"]),
     }
 
     def pose(angles):
         for k in occ:
             occ[k].transform = base[k]
         # apply from the tip of the chain back to the root so each rotation uses the parent frame
-        for joint in ("head_roll", "head_yaw", "head_pitch", "neck_pitch"):
+        for joint in ("beak", "head_roll", "head_yaw", "head_pitch", "neck_pitch"):
             a = angles.get(joint, 0.0)
             if not a:
                 continue
@@ -84,6 +86,10 @@ try:
     for y in (0.0, 0.8, 1.6, 2.4):
         for r in HP["lim_head_roll"]:
             tests.append({"head_yaw": y, "head_roll": r})
+    for b in HP["lim_beak"]:
+        tests.append({"beak": b})
+        for r in HP["lim_head_roll"]:
+            tests.append({"beak": b, "head_roll": r})
     for t in tests:
         pose(t)
         print(t, hits() or "none")

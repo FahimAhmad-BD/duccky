@@ -59,7 +59,8 @@ CONFIGS = {
     "G_E_plus_knee_spring": mixed("XC330-M288-T", "XL330-M288-T"),
 }
 # Extra design parameters per configuration (passed to sizing.py --set)
-CONFIG_SET = {"G_E_plus_knee_spring": {"LEG.knee_spring_k": 0.10}}
+# Lee Spring LTL048J 04 / LTR048J 04 (music wire): 31.68 kg mm at 180 deg -> 0.0989 N m/rad
+CONFIG_SET = {"G_E_plus_knee_spring": {"LEG.knee_spring_k": 0.0989}}
 SELECTED = "G_E_plus_knee_spring"
 RULE_PEAK, RULE_WALK = 0.70, 0.40
 

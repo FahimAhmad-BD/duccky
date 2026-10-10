@@ -25,7 +25,8 @@ try:
     for joint, (model, o, xa, ya, za) in leg.servo_poses(g).items():
         occ["servo_" + joint] = servo.build(root, model, f"{joint} {model}", leg.matrix(o, xa, ya, za))
     builders = {"yaw_link": legparts.yaw_link, "roll_link": lambda c, gg: legparts.roll_link(c, gg)[0],
-                "thigh": legparts.thigh, "shank": legparts.shank, "foot": legparts.foot}
+                "thigh": legparts.thigh, "shank": legparts.shank, "foot": legparts.foot,
+                "knee_spring": legparts.knee_spring}
     for name, fn in builders.items():
         o = dk.new_component(root, name)
         body = fn(o.component, g)
@@ -59,9 +60,9 @@ try:
 
     p = runpy.run_path(leg.PARAMS)["LEG"]
     chains = {
-        "hip_roll": ("x", g["z_roll"], ["roll_link", "servo_hip_pitch", "thigh", "servo_knee", "shank", "servo_ankle", "foot"], p["lim_hip_roll"]),
-        "hip_pitch": ("y", g["z_pitch"], ["thigh", "servo_knee", "shank", "servo_ankle", "foot"], p["lim_hip_pitch"]),
-        "knee": ("y", g["z_knee"], ["shank", "servo_ankle", "foot"], p["lim_knee"]),
+        "hip_roll": ("x", g["z_roll"], ["roll_link", "servo_hip_pitch", "thigh", "servo_knee", "shank", "knee_spring", "servo_ankle", "foot"], p["lim_hip_roll"]),
+        "hip_pitch": ("y", g["z_pitch"], ["thigh", "servo_knee", "shank", "knee_spring", "servo_ankle", "foot"], p["lim_hip_pitch"]),
+        "knee": ("y", g["z_knee"], ["shank", "knee_spring", "servo_ankle", "foot"], p["lim_knee"]),
         "ankle": ("y", g["z_ankle"], ["foot", "servo_ankle"], p["lim_ankle"]),
     }
     base = {k: occ[k].transform.copy() for k in occ}

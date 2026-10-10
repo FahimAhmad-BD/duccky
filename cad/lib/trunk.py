@@ -66,9 +66,15 @@ def frame(comp, hip_y):
     for s in (1, -1):
         y0, y1 = sorted((s * (hip_y - 10 - 2), s * (hip_y - 10 - 8)))
         tools.append(prim.box(comp, 12.0, 30.0, y0, y1, DECK_Z0 - 0.5, DECK_Z1 + 0.5))
-    # Back opening for the cartridge slot, between the walls, floor to deck
+    # Lightening (RK1: every gram above the hips counts). Deck window between the yaw servos,
+    # inside the standoff pattern; floor under the cartridge reduced to two 6 mm rails; side
+    # wall windows between floor and deck.
+    tools.append(prim.box(comp, -22.0, 22.0, -18.0, 18.0, DECK_Z0 - 0.5, DECK_Z1 + 0.5))
     cx0, cx1, cy0, cy1, cz0, cz1 = robot.cartridge_box()
-    tools.append(prim.box(comp, X0 - 0.5, cx1 + 1.0, cy0 - 0.5, cy1 + 0.5, robot.FLOOR_Z1, DECK_Z0))
+    tools.append(prim.box(comp, cx0 + 4.0, cx1 - 4.0, cy0 + 6.0, cy1 - 6.0, robot.FLOOR_Z0 - 0.5, robot.FLOOR_Z1 + 0.5))
+    for s in (1, -1):
+        y0, y1 = sorted((s * (HALF_Y - WALL - 0.5), s * (HALF_Y + 0.5)))
+        tools.append(prim.box(comp, -35.0, 35.0, y0, y1, robot.FLOOR_Z1 + 3.0, DECK_Z0 - 3.0))
     prim.cut(comp, main, tools)
     main.name = "trunk frame"
     return main
