@@ -17,7 +17,7 @@
   <worldbody>
     <light pos="0.3 -0.3 1" dir="-0.3 0.3 -1"/>
     <geom name="floor" type="plane" size="2 2 0.05" material="grid" contype="1" conaffinity="1"/>
-    <body name="trunk" pos="0 0 0.13963">
+    <body name="trunk" pos="0 0 0.15496">
       <freejoint name="root"/>
       <site name="imu" pos="0 0 0.020"/>
       <geom name="trunk_shell" type="box" size="0.045 0.04 0.035" pos="0.006 0 0.03"
@@ -31,26 +31,26 @@
     <body name="left_hip_yaw_link" pos="0 0.034 0">
       <joint name="left_hip_yaw" axis="0 0 1" range="-0.5 0.5"/>
       <geom type="box" size="0.012 0.012 0.008" pos="0 0 -0.008" mass="0.008" class="struct"/>
-      <geom name="left_servo_hip_roll" type="box" size="0.017 0.01 0.013" pos="0 0 -0.016" mass="0.018" class="servo"/>
-      <body name="left_hip_roll_link" pos="0 0 -0.016">
+      <geom name="left_servo_hip_roll" type="box" size="0.017 0.01 0.013" pos="0 0 -0.014" mass="0.018" class="servo"/>
+      <body name="left_hip_roll_link" pos="0 0 -0.014">
         <joint name="left_hip_roll" axis="1 0 0" range="-0.4 0.4"/>
         <geom type="box" size="0.012 0.014 0.006" pos="0 0 -0.006" mass="0.008" class="struct"/>
-        <geom name="left_servo_hip_pitch" type="box" size="0.017 0.01 0.013" pos="0 0 -0.012" mass="0.055" class="servo"/>
-        <body name="left_thigh" pos="0 0 -0.012">
+        <geom name="left_servo_hip_pitch" type="box" size="0.017 0.01 0.013" pos="0 0 -0.0297" mass="0.055" class="servo"/>
+        <body name="left_thigh" pos="0 0 -0.0297">
           <joint name="left_hip_pitch" axis="0 1 0" range="-1.6 1.6"/>
-          <geom type="capsule" fromto="0 0 0 0 0 -0.056" size="0.012" mass="0.022" class="struct"/>
-          <geom name="left_servo_knee" type="box" size="0.017 0.01 0.013" pos="0 0 -0.056" mass="0.055" class="servo"/>
-          <site name="left_knee_site" pos="0 0 -0.056"/>
-          <body name="left_shank" pos="0 0 -0.056">
+          <geom type="capsule" fromto="0 0 0 0 0 -0.052" size="0.012" mass="0.022" class="struct"/>
+          <geom name="left_servo_knee" type="box" size="0.017 0.01 0.013" pos="0 0 -0.052" mass="0.055" class="servo"/>
+          <site name="left_knee_site" pos="0 0 -0.052"/>
+          <body name="left_shank" pos="0 0 -0.052">
             <joint name="left_knee" axis="0 1 0" range="-0.1 2.2" stiffness="0" springref="0"/>
-            <geom type="capsule" fromto="0 0 0 0 0 -0.05" size="0.011" mass="0.016" class="struct"/>
-            <geom name="left_servo_ankle" type="box" size="0.017 0.01 0.013" pos="0 0 -0.05" mass="0.055" class="servo"/>
-            <body name="left_foot" pos="0 0 -0.05">
+            <geom type="capsule" fromto="0 0 0 0 0 -0.046" size="0.011" mass="0.016" class="struct"/>
+            <geom name="left_servo_ankle" type="box" size="0.017 0.01 0.013" pos="0 0 -0.046" mass="0.055" class="servo"/>
+            <body name="left_foot" pos="0 0 -0.046">
               <joint name="left_ankle" axis="0 1 0" range="-1.4 1.4"/>
               <geom name="left_sole" type="box" size="0.0375 0.018 0.004"
-                    pos="0.006 0 -0.01"
+                    pos="0.006 0 -0.017"
                     mass="0.02" class="foot"/>
-              <site name="left_sole_site" pos="0.006 0 -0.014"/>
+              <site name="left_sole_site" pos="0.006 0 -0.021"/>
             </body>
           </body>
         </body>
@@ -60,26 +60,26 @@
     <body name="right_hip_yaw_link" pos="0 -0.034 0">
       <joint name="right_hip_yaw" axis="0 0 1" range="-0.5 0.5"/>
       <geom type="box" size="0.012 0.012 0.008" pos="0 0 -0.008" mass="0.008" class="struct"/>
-      <geom name="right_servo_hip_roll" type="box" size="0.017 0.01 0.013" pos="0 0 -0.016" mass="0.018" class="servo"/>
-      <body name="right_hip_roll_link" pos="0 0 -0.016">
+      <geom name="right_servo_hip_roll" type="box" size="0.017 0.01 0.013" pos="0 0 -0.014" mass="0.018" class="servo"/>
+      <body name="right_hip_roll_link" pos="0 0 -0.014">
         <joint name="right_hip_roll" axis="1 0 0" range="-0.4 0.4"/>
         <geom type="box" size="0.012 0.014 0.006" pos="0 0 -0.006" mass="0.008" class="struct"/>
-        <geom name="right_servo_hip_pitch" type="box" size="0.017 0.01 0.013" pos="0 0 -0.012" mass="0.055" class="servo"/>
-        <body name="right_thigh" pos="0 0 -0.012">
+        <geom name="right_servo_hip_pitch" type="box" size="0.017 0.01 0.013" pos="0 0 -0.0297" mass="0.055" class="servo"/>
+        <body name="right_thigh" pos="0 0 -0.0297">
           <joint name="right_hip_pitch" axis="0 1 0" range="-1.6 1.6"/>
-          <geom type="capsule" fromto="0 0 0 0 0 -0.056" size="0.012" mass="0.022" class="struct"/>
-          <geom name="right_servo_knee" type="box" size="0.017 0.01 0.013" pos="0 0 -0.056" mass="0.055" class="servo"/>
-          <site name="right_knee_site" pos="0 0 -0.056"/>
-          <body name="right_shank" pos="0 0 -0.056">
+          <geom type="capsule" fromto="0 0 0 0 0 -0.052" size="0.012" mass="0.022" class="struct"/>
+          <geom name="right_servo_knee" type="box" size="0.017 0.01 0.013" pos="0 0 -0.052" mass="0.055" class="servo"/>
+          <site name="right_knee_site" pos="0 0 -0.052"/>
+          <body name="right_shank" pos="0 0 -0.052">
             <joint name="right_knee" axis="0 1 0" range="-0.1 2.2" stiffness="0" springref="0"/>
-            <geom type="capsule" fromto="0 0 0 0 0 -0.05" size="0.011" mass="0.016" class="struct"/>
-            <geom name="right_servo_ankle" type="box" size="0.017 0.01 0.013" pos="0 0 -0.05" mass="0.055" class="servo"/>
-            <body name="right_foot" pos="0 0 -0.05">
+            <geom type="capsule" fromto="0 0 0 0 0 -0.046" size="0.011" mass="0.016" class="struct"/>
+            <geom name="right_servo_ankle" type="box" size="0.017 0.01 0.013" pos="0 0 -0.046" mass="0.055" class="servo"/>
+            <body name="right_foot" pos="0 0 -0.046">
               <joint name="right_ankle" axis="0 1 0" range="-1.4 1.4"/>
               <geom name="right_sole" type="box" size="0.0375 0.018 0.004"
-                    pos="0.006 0 -0.01"
+                    pos="0.006 0 -0.017"
                     mass="0.02" class="foot"/>
-              <site name="right_sole_site" pos="0.006 0 -0.014"/>
+              <site name="right_sole_site" pos="0.006 0 -0.021"/>
             </body>
           </body>
         </body>

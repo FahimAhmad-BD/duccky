@@ -27,8 +27,8 @@ Inspired by Pollen Robotics' Microduck. Duccky is a clean sheet design and conta
 | Mass | 825 g against an 850 g limit |
 | Compute | Radxa ZERO 3W, 4 GB, 16 GB eMMC |
 | Battery | Tool-free 2S cartridge, 2 × Molicel INR-18650-P28A, 20.6 Wh |
-| Height | 28.1 cm in nominal stance |
-| Leg | 5 DOF, no ankle roll, thigh 56 mm, shank 50 mm |
+| Height | about 29.6 cm in nominal stance |
+| Leg | 5 DOF, no ankle roll, thigh 52 mm, shank 46 mm |
 
 ## Repository layout
 

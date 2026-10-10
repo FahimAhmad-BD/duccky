@@ -111,3 +111,17 @@ Phase 2 replaced three inputs: the battery cartridge (105 g, was 85 g), the spea
 | ankle | XC330-M288-T | 0.344 | 0.351 | 37 | 38 |
 
 Neck, head and beak demands are unchanged. Hip pitch remains the joint with the least margin (risk RK1).
+
+## 10. Phase 3 leg geometry rerun
+
+The Phase 0 joint offsets were placeholders. `analysis/layout/leg_layout.py` derives them from the X330 servo bodies (ROBOTIS drawing) for the chosen arrangement: hip roll servo lying horizontal under the yaw horn, hip pitch servo hanging below it in the roll bracket, knee servo in the thigh, and ankle servo lying in the foot. Each offset includes 3 mm printed walls, 1 mm running clearance, and clearance for the full joint travel.
+
+| Offset | Phase 0 | Phase 3 | Basis |
+|---|---|---|---|
+| Hip yaw to hip roll | 16 mm | 14.0 mm | plate + gap + half servo width |
+| Hip roll to hip pitch | 12 mm | 29.7 mm | roll bracket clears the fixed roll servo at ±0.40 rad |
+| Ankle to sole | 6 mm | 13.0 mm | half servo width + sole plate |
+| Thigh | 56 mm | 52 mm | shortened to hold height within 30 cm |
+| Shank | 50 mm | 46 mm | shortened to hold height within 30 cm |
+
+The trunk origin rises 15.4 mm, so the robot stands about 29.6 cm. Configuration G still passes every rule at 825 g: hip pitch 0.358 N m walking (38.5 % of stall, peak 40 %), knee 0.286 N m walking (31 %) and 0.497 N m peak (54 %), ankle 0.344 N m walking (37 %). Hip pitch remains the joint with the least margin (RK1).

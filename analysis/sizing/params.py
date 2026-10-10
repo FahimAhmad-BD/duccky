@@ -36,11 +36,11 @@ TRUNK = {
 
 LEG = {
     "hip_y": 0.034,          # lateral offset of each hip yaw axis from centreline
-    "yaw_to_roll": 0.016,    # vertical drop hip yaw -> hip roll
-    "roll_to_pitch": 0.012,  # vertical drop hip roll -> hip pitch
-    "thigh": 0.056,          # hip pitch -> knee
-    "shank": 0.050,          # knee -> ankle (shorter than thigh: cuts knee lever arm)
-    "ankle_to_sole": 0.006,  # ankle axis -> sole
+    "yaw_to_roll": 0.014,    # vertical drop hip yaw -> hip roll (analysis/layout/leg_layout.py)
+    "roll_to_pitch": 0.0297, # vertical drop hip roll -> hip pitch (leg_layout.py: roll clearance)
+    "thigh": 0.052,          # hip pitch -> knee (shortened from 56 to hold height <= 30 cm)
+    "shank": 0.046,          # knee -> ankle (shortened from 50; shorter than thigh cuts the knee lever arm)
+    "ankle_to_sole": 0.013,  # ankle axis -> sole (leg_layout.py: ankle servo lies in the foot)
     "foot": (0.075, 0.036, 0.008),  # sole box full size
     "foot_ankle_x": -0.006,  # ankle axis x relative to foot centre (negative: ankle 6 mm behind, foot extends forward)
     # Printed + fastener mass per link (servo mass is added separately)
