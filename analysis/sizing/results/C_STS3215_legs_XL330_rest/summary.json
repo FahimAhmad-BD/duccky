@@ -63,7 +63,7 @@
       "walk_peak": 0.4348,
       "peak": 0.4463,
       "static_single_support_max": 0.4463,
-      "hip_hinge_max": 0.235,
+      "hip_hinge_max": 0.2378,
       "dynamic_max": 0.249,
       "speed_rad_s": 2.7489
     },
@@ -80,7 +80,7 @@
       "walk_peak": 0.4248,
       "peak": 0.4328,
       "static_single_support_max": 0.4328,
-      "hip_hinge_max": 0.2295,
+      "hip_hinge_max": 0.2322,
       "dynamic_max": 0.2575,
       "speed_rad_s": 2.3562
     },

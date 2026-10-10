@@ -63,15 +63,15 @@
       "walk_peak": 0.3584,
       "peak": 0.3698,
       "static_single_support_max": 0.3698,
-      "hip_hinge_max": 0.2292,
-      "dynamic_max": 0.2497,
+      "hip_hinge_max": 0.2319,
+      "dynamic_max": 0.2496,
       "speed_rad_s": 2.7489
     },
     "knee": {
       "walk_peak": 0.406,
       "peak": 0.5424,
       "static_single_support_max": 0.5297,
-      "hip_hinge_max": 0.1089,
+      "hip_hinge_max": 0.1116,
       "dynamic_max": 0.5424,
       "swing_spring_check": 0.0266,
       "speed_rad_s": 3.927
@@ -80,7 +80,7 @@
       "walk_peak": 0.3442,
       "peak": 0.3509,
       "static_single_support_max": 0.3509,
-      "hip_hinge_max": 0.2214,
+      "hip_hinge_max": 0.2241,
       "dynamic_max": 0.2482,
       "speed_rad_s": 2.3562
     },

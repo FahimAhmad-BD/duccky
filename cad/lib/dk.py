@@ -146,3 +146,16 @@ def physical(comp_or_occ):
     c = pp.centerOfMass
     return {"mass_g": round(pp.mass * 1000, 2), "com_mm": [round(c.x * 10, 2), round(c.y * 10, 2), round(c.z * 10, 2)],
             "volume_mm3": round(pp.volume * 1000, 1)}
+
+
+def printed_material(name="PETG (Prusament, solid)", density_g_cm3=1.27):
+    """Design material for printed parts. Fusion's libraries have no PLA or PETG, so this
+    copies ABS Plastic and sets the density (Prusament PETG TDS v1.1: 1.27 g/cm3, ISO 1183).
+    Masses are for solid parts, an upper bound for infilled prints."""
+    des = design()
+    m = des.materials.itemByName(name)
+    if m is None:
+        base = app.materialLibraries.itemByName("Fusion Material Library").materials.itemByName("ABS Plastic")
+        m = des.materials.addByCopy(base, name)
+    m.materialProperties.itemById("structural_Density").value = density_g_cm3 * 1000.0
+    return m

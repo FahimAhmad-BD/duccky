@@ -34,7 +34,7 @@ Duccky v1.0 is a digital twin of a small bipedal duck robot, designed to product
 
 | Parameter | Target | Phase 1 model |
 |---|---|---|
-| Overall height (nominal stance) | 25 to 30 cm | 29.6 cm (Phase 3 leg geometry, DCK-01 section 10) |
+| Overall height (nominal stance) | 25 to 30 cm | 29.7 cm (Phase 3 leg geometry, DCK-01 section 10) |
 | Total mass | ≤ 850 g | 825 g |
 | Hip pitch axis height (nominal stance) | | 11.2 cm |
 | Nominal stance | Slight crouch, knee never locked | Knee 0.80 rad |

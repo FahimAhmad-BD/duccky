@@ -63,7 +63,7 @@
       "walk_peak": 0.3788,
       "peak": 0.3911,
       "static_single_support_max": 0.3911,
-      "hip_hinge_max": 0.2475,
+      "hip_hinge_max": 0.2505,
       "dynamic_max": 0.2531,
       "speed_rad_s": 2.7489
     },
@@ -71,7 +71,7 @@
       "walk_peak": 0.4288,
       "peak": 0.5595,
       "static_single_support_max": 0.5595,
-      "hip_hinge_max": 0.1199,
+      "hip_hinge_max": 0.1228,
       "dynamic_max": 0.5489,
       "swing_spring_check": 0.0266,
       "speed_rad_s": 3.927
@@ -80,7 +80,7 @@
       "walk_peak": 0.3632,
       "peak": 0.3701,
       "static_single_support_max": 0.3701,
-      "hip_hinge_max": 0.2389,
+      "hip_hinge_max": 0.2419,
       "dynamic_max": 0.2504,
       "speed_rad_s": 2.3562
     },

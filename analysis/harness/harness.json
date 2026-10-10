@@ -49,12 +49,12 @@
       "crosses": [
         "hip_roll"
       ],
-      "straight_mm": 49.7,
+      "straight_mm": 50.7,
       "service_loops_mm": {
         "hip_roll": 9.6
       },
-      "length_mm": 69.3,
-      "cut_length_mm": 70,
+      "length_mm": 70.3,
+      "cut_length_mm": 75,
       "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
       "wire": "3 x 22 AWG high flex silicone (UL3135)",
       "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
@@ -69,13 +69,13 @@
         "hip_roll",
         "hip_pitch"
       ],
-      "straight_mm": 195.7,
+      "straight_mm": 196.7,
       "service_loops_mm": {
         "hip_yaw": 12.0,
         "hip_roll": 9.6,
         "hip_pitch": 38.4
       },
-      "length_mm": 265.7,
+      "length_mm": 266.7,
       "cut_length_mm": 270,
       "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
       "wire": "3 x 22 AWG high flex silicone (UL3135)",
@@ -139,12 +139,12 @@
       "crosses": [
         "hip_roll"
       ],
-      "straight_mm": 49.7,
+      "straight_mm": 50.7,
       "service_loops_mm": {
         "hip_roll": 9.6
       },
-      "length_mm": 69.3,
-      "cut_length_mm": 70,
+      "length_mm": 70.3,
+      "cut_length_mm": 75,
       "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
       "wire": "3 x 22 AWG high flex silicone (UL3135)",
       "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
@@ -159,13 +159,13 @@
         "hip_roll",
         "hip_pitch"
       ],
-      "straight_mm": 195.7,
+      "straight_mm": 196.7,
       "service_loops_mm": {
         "hip_yaw": 12.0,
         "hip_roll": 9.6,
         "hip_pitch": 38.4
       },
-      "length_mm": 265.7,
+      "length_mm": 266.7,
       "cut_length_mm": 270,
       "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
       "wire": "3 x 22 AWG high flex silicone (UL3135)",

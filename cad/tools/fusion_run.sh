@@ -22,7 +22,12 @@ mv "$bridge/inbox/$name.tmp" "$bridge/inbox/$name.py"
 out="$bridge/outbox/$name.json"
 for ((i = 0; i < timeout * 2; i++)); do
   if [ -f "$out" ]; then
-    cat "$out"
+    py="${DUCCKY_PY:-$USERPROFILE/.venvs/duccky/Scripts/python.exe}"
+    if [ -x "$py" ]; then
+      "$py" -c 'import json,sys; d=json.load(open(sys.argv[1])); print("ok:", d["ok"], " seconds:", d["seconds"]); print(d["stdout"], end=""); print(d["error"] or "", end=""); [print("image:", i) for i in d["images"]]' "$out"
+    else
+      cat "$out"
+    fi
     grep -q '"ok": true' "$out"
     exit $?
   fi

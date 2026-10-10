@@ -81,10 +81,10 @@ User hardware: Asus A15 laptop, Ryzen 9 8945H, 32 GB RAM, RTX 4060. Windows on t
 Each knee has a parallel assist torsion spring, 0.10 N m/rad, with its rest angle at a straight knee. Both servos share a 20 × 34 mm footprint and the ROBOTIS Protocol 2.0 TTL bus, so one servo pocket design serves every joint. All XL330 fails (knee 106 % of stall at peak). All STS3215 passes but weighs 1338 g and does not fit.
 
 **Geometry (`analysis/sizing/params.py`):**
-* Thigh 52 mm, shank 46 mm, hip lateral offset 34 mm; hip yaw to roll 14 mm, roll to pitch 29.7 mm, ankle to sole 13 mm (Phase 3 layout from servo geometry, `analysis/layout/leg_layout.py`, DCK-01 §10).
+* Thigh 52 mm, shank 46 mm, hip lateral offset 34 mm; hip yaw to roll 14 mm, roll to pitch 30.7 mm, ankle to sole 13 mm (Phase 3 layout from servo geometry, `analysis/layout/leg_layout.py`, DCK-01 §10).
 * Foot 75 × 36 × 8 mm, ankle 6 mm behind the foot centre. Leg arrangement: roll servo horizontal under the yaw horn, pitch servo hanging in the roll bracket, knee servo in the thigh, ankle servo lying in the foot.
 * Nominal stance: hip pitch −0.40, knee 0.80, ankle −0.40 rad.
-* Height about 29.6 cm, total mass 825 g against an 850 g limit (DCK-01 §10).
+* Height about 29.7 cm, total mass 825 g against an 850 g limit (DCK-01 §10).
 
 **Pass rules:**
 1. Peak demand at or below 70 % of stall.

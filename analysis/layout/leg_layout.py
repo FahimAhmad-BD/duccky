@@ -43,8 +43,9 @@ def roll_to_pitch():
     b = (23.0 + 2.0) / 2
     t = ROLL_TRAVEL
     h = (W / 2 + GAP + b * math.sin(t)) / math.cos(t)
-    # Pitch servo hangs below that plate, horn end up: axis AXIS_END below its top face.
-    return h + PLATE + AXIS_END
+    # Pitch servo hangs below that plate with a running gap, horn end up: axis AXIS_END
+    # below its top face.
+    return h + PLATE + GAP + AXIS_END
 
 
 def ankle_to_sole():
@@ -56,11 +57,11 @@ def ankle_to_sole():
 def main():
     y2r, r2p, a2s = yaw_to_roll(), roll_to_pitch(), ankle_to_sole()
     old = (P.LEG["yaw_to_roll"] * 1000, P.LEG["roll_to_pitch"] * 1000, P.LEG["ankle_to_sole"] * 1000)
-    print(f"yaw_to_roll    {y2r:6.1f} mm   (Phase 0 placeholder {old[0]:.0f})")
-    print(f"roll_to_pitch  {r2p:6.1f} mm   (Phase 0 placeholder {old[1]:.0f})")
-    print(f"ankle_to_sole  {a2s:6.1f} mm   (Phase 0 placeholder {old[2]:.0f})")
+    print(f"yaw_to_roll    {y2r:6.1f} mm   (params.py {old[0]:.1f})")
+    print(f"roll_to_pitch  {r2p:6.1f} mm   (params.py {old[1]:.1f})")
+    print(f"ankle_to_sole  {a2s:6.1f} mm   (params.py {old[2]:.1f})")
     added = (y2r - old[0]) + (r2p - old[1]) + (a2s - old[2])
-    print(f"leg stack grows by {added:.1f} mm over Phase 0")
+    print(f"difference from params.py: {added:+.1f} mm")
     return y2r, r2p, a2s
 
 
