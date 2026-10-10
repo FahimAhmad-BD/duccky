@@ -186,7 +186,7 @@ UART2 (pins 8 and 10) remains the debug console. Pins 3 and 5 carry I2C pull-up 
 |---|---|
 | Outline | 76 × 62 mm rectangle, fits the 90 × 80 mm trunk section |
 | Stackup | 4 layers: F.Cu signals and local pours, In1 GND plane, In2 servo rail plane (below the computer) and signals, B.Cu signals and power pours |
-| Computer | Radxa ZERO 3W above the board on a 2 × 20 socket; the four M2.5 holes follow the 58 × 23 mm Pi Zero pattern and double as the trunk standoffs |
+| Computer | Radxa ZERO 3W above the board on a 2 × 20 socket; the four M2.5 holes follow Radxa's 57.8 × 22.9 mm pattern (RK10) and double as the trunk standoffs |
 | Parts | 121 footprints, all on the top side |
 | Net classes | Default 0.20 mm track and 0.15 mm clearance; Power 0.30 mm; HighCurrent 0.40 mm escapes into pours |
 | High current paths | B.Cu and F.Cu pours for VBAT (battery entry to eFuse) and VSYS (eFuse to both regulators), In2 plane for the 5.0 V servo rail, stitched with vias |
@@ -243,5 +243,5 @@ Each length is the straight run plus a service loop for every joint the cable cr
 | RK6 | Hip pitch walking demand rose to 38.4 % of stall (limit 40 %) with the 105 g cartridge | Mount the cartridge low and centred over the hip pitch axes in CAD; recheck with Fusion mass properties |
 | RK7 | Cell mass is a retailer figure | Weigh or source a manufacturer figure before the BOM is frozen |
 | RK8 | Head yaw travels 5.8 rad. Cables N4 and HB need 70 mm service loops there, and the camera's 150 mm FPC cannot follow that travel as a free loop | In Phase 3, route cables along the yaw axis and coil the FPC as a clock spring around it, or reduce head yaw travel; recompute the harness from CAD |
-| RK10 | The socket and hole positions assume the ZERO 3W follows the Raspberry Pi Zero mechanical pattern (holes 58 × 23 mm, header 3.5 mm from the long edge); Radxa states form factor compatibility but its mechanical drawing has not been checked | Check against Radxa's 2D drawing before Phase 3 trunk CAD; positions are parameters in `ecad/gen/pcb.py` |
+| RK10 | Closed. Hole and header positions taken from Radxa's DXF (radxa_zero_3w_v1110_top.dxf): four Ø2.82 mm holes on a 57.8 × 22.9 mm pattern, header centre 3.325 mm from the long edge. The Pi Zero values first assumed were up to 0.175 mm off and are replaced | Source: https://dl.radxa.com/zero3/docs/hw/3w/radxa_zero_3w_2d_dxf.zip |
 | RK9 | Head board (VL53L8CX, T5848) is not yet designed: the ST and TDK datasheets could not be retrieved automatically (ST blocks scripted downloads, TDK requires a form) | Download both datasheets manually, then design the head board; the carrier already provides its connector (J14) |

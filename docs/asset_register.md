@@ -15,5 +15,6 @@ Every third party model, library, dataset and code source used in Duccky v1.0, w
 | A09 | Microsoft Build of OpenJDK 21 and 25 | Runs Freerouting | learn.microsoft.com/java/openjdk | GPL 2 with Classpath Exception | No, tool only |
 | A10 | pypdf, pypdfium2 | Reading manufacturer datasheets during design | PyPI | BSD 3 / Apache 2.0 and BSD | No, tool only |
 | A11 | Claude Fusion Bridge | Drives Fusion from Claude Code | private repo FahimAhmad-BD/claude-fusion-bridge (same author) | Apache 2.0 | No, separate repo |
+| A12 | Radxa ZERO 3W 2D DXF (v1.11) | Hole and header positions on the carrier | dl.radxa.com/zero3/docs/hw/3w/radxa_zero_3w_2d_dxf.zip | Radxa published documentation | No, dimensions only |
 
 Servo, compute and mechanical CAD models are added here as they are sourced in Phase 3.
