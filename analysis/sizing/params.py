@@ -63,8 +63,8 @@ LEG = {
 HEAD = {
     "neck_base": (0.030, 0.0, 0.058),  # neck pitch axis relative to trunk origin (cad/lib/head.py)
     "neck_vec": (0.038, 0.0, 0.0),        # neck link runs forward (cad/lib/head.py)
-    "pitch_to_yaw_vec": (0.0145, 0.0, 0.039),  # head pitch axis -> head yaw joint (yaw servo on the pitch case far end)
-    "yaw_to_roll_vec": (0.0, 0.0, 0.014),      # head yaw joint -> head roll axis
+    "pitch_to_yaw_vec": (0.0, 0.0, 0.039),     # head pitch axis -> head yaw joint (yaw axis above the head pitch axis)
+    "yaw_to_roll_vec": (0.0, 0.0, 0.0155),     # head yaw joint -> head roll axis (cad/lib/head.py)
     "head_size": (0.070, 0.060, 0.050),
     "beak_len": 0.040,
     "m_neck": 0.012,
@@ -72,7 +72,7 @@ HEAD = {
     "m_head_payload": 0.012,  # camera, ToF, wiring
     "m_beak": 0.010,
     "lim_neck_pitch": (-1.50, 0.70),    # clear range from cad/build/head_skeleton.py, 0.1 rad margin
-    "lim_head_pitch": (-1.20, 1.50),    # clear range from cad/build/head_skeleton.py, 0.1 rad margin
+    "lim_head_pitch": (-0.80, 1.50),    # clear range from cad/build/head_skeleton.py, 0.1 rad margin
     "lim_head_yaw": (-2.90, 2.90),
     "lim_head_roll": (-0.45, 0.45),
     "lim_beak": (0.0, 0.90),
