@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "F:\\Drive\\OneDrive\\Personal Projects\\Duccky\\Duccky v1.0\\ecad\\carrier\\carrier.kicad_sch")
-		(date "2026-10-10T13:22:22")
+		(date "2026-10-10T15:01:45")
 		(tool "Eeschema 10.0.6")
 		(sheet
 			(number "1")
@@ -2512,6 +2512,9 @@
 				(value "carrier.kicad_sch")
 			)
 			(property
+				(name "exclude_from_bom")
+			)
+			(property
 				(name "ki_keywords")
 				(value "mounting hole")
 			)
@@ -2557,6 +2560,9 @@
 			(property
 				(name "Sheetfile")
 				(value "carrier.kicad_sch")
+			)
+			(property
+				(name "exclude_from_bom")
 			)
 			(property
 				(name "ki_keywords")
@@ -2606,6 +2612,9 @@
 				(value "carrier.kicad_sch")
 			)
 			(property
+				(name "exclude_from_bom")
+			)
+			(property
 				(name "ki_keywords")
 				(value "mounting hole")
 			)
@@ -2651,6 +2660,9 @@
 			(property
 				(name "Sheetfile")
 				(value "carrier.kicad_sch")
+			)
+			(property
+				(name "exclude_from_bom")
 			)
 			(property
 				(name "ki_keywords")
@@ -6909,7 +6921,7 @@
 				(names "/")
 				(tstamps "/")
 			)
-			(tstamps "422b6ff3-76cb-5c5f-86ec-d1719b2ecf20" "d4a262e7-72ab-573d-b152-1f72a40b7aeb"
+			(tstamps "d4a262e7-72ab-573d-b152-1f72a40b7aeb" "422b6ff3-76cb-5c5f-86ec-d1719b2ecf20"
 				"26b083b8-7f2b-53a4-8cbc-9770203db89e"
 			)
 			(units
@@ -6999,7 +7011,7 @@
 				(names "/")
 				(tstamps "/")
 			)
-			(tstamps "a01af3e3-388e-5dae-afbb-97db16e45477" "38c2cd1f-52a0-510f-86fa-98e2f7bb4f02"
+			(tstamps "38c2cd1f-52a0-510f-86fa-98e2f7bb4f02" "a01af3e3-388e-5dae-afbb-97db16e45477"
 				"0326cbbb-1eb6-5006-88ec-463d670a31c0"
 			)
 			(units
@@ -8958,7 +8970,7 @@
 		(net
 			(code "1")
 			(name "/3V3")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "C28")
 				(pin "1")
@@ -9162,7 +9174,7 @@
 		(net
 			(code "4")
 			(name "/BAT_MID")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "J2")
 				(pin "1")
@@ -9447,7 +9459,7 @@
 		(net
 			(code "16")
 			(name "/CHG_CBSET")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "R15")
 				(pin "2")
@@ -9533,7 +9545,7 @@
 		(net
 			(code "21")
 			(name "/CHG_PMID")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "C30")
 				(pin "1")
@@ -9587,7 +9599,7 @@
 		(net
 			(code "23")
 			(name "/CHG_SNS")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "C34")
 				(pin "1")
@@ -9614,7 +9626,7 @@
 		(net
 			(code "24")
 			(name "/CHG_SW")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "C32")
 				(pin "2")
@@ -10644,7 +10656,7 @@
 		(net
 			(code "43")
 			(name "/IMON")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "C5")
 				(pin "1")
@@ -10832,7 +10844,7 @@
 		(net
 			(code "53")
 			(name "/SPK_N")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "J13")
 				(pin "2")
@@ -10849,7 +10861,7 @@
 		(net
 			(code "54")
 			(name "/SPK_P")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "J13")
 				(pin "1")
@@ -10882,7 +10894,7 @@
 		(net
 			(code "56")
 			(name "/SW_SERVO")
-			(class "Default")
+			(class "HighCurrent,Default")
 			(node
 				(ref "C8")
 				(pin "2")
@@ -10910,7 +10922,7 @@
 		(net
 			(code "57")
 			(name "/SW_SYS")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "C19")
 				(pin "2")
@@ -11116,7 +11128,7 @@
 		(net
 			(code "69")
 			(name "/V5_SERVO")
-			(class "Default")
+			(class "HighCurrent,Default")
 			(node
 				(ref "C10")
 				(pin "1")
@@ -11219,7 +11231,7 @@
 		(net
 			(code "71")
 			(name "/V5_SYS")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "C24")
 				(pin "1")
@@ -11313,7 +11325,7 @@
 		(net
 			(code "72")
 			(name "/VBAT")
-			(class "Default")
+			(class "HighCurrent,Default")
 			(node
 				(ref "C1")
 				(pin "1")
@@ -11387,7 +11399,7 @@
 		(net
 			(code "73")
 			(name "/VBUS")
-			(class "Default")
+			(class "Power,Default")
 			(node
 				(ref "C29")
 				(pin "1")
@@ -11448,7 +11460,7 @@
 		(net
 			(code "75")
 			(name "/VSYS")
-			(class "Default")
+			(class "HighCurrent,Default")
 			(node
 				(ref "C11")
 				(pin "1")

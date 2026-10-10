@@ -76,10 +76,12 @@ class Schematic:
         xmin, xmax, ymin, ymax = part.extent()
         unit_step = _snap(ymax - ymin + 10.16)
         used = set()
+        flag = next((x for x in part.sym if isinstance(x, list) and x and x[0] == "in_bom"), None)
+        in_bom = flag[1] if flag else "yes"
         for k, unit in enumerate(part.units):
             ux, uy = _snap(x), _snap(y + k * unit_step)
             inst = ["symbol", ["lib_id", Q(lib_id)], ["at", ux, uy, "0"], ["unit", unit],
-                    ["exclude_from_sim", "no"], ["in_bom", "yes"], ["on_board", "yes"],
+                    ["exclude_from_sim", "no"], ["in_bom", in_bom], ["on_board", "yes"],
                     ["dnp", "yes" if part.dnp else "no"], ["uuid", _uid(self.project, part.ref, unit)],
                     # Reference above the topmost pin, value below the lowest
                     ["property", Q("Reference"), Q(part.ref), ["at", ux, uy - ymax - 2.54, "0"], _font()],

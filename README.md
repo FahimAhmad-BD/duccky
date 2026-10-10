@@ -10,8 +10,8 @@ Inspired by Pollen Robotics' Microduck. Duccky is a clean sheet design and conta
 |---|---|---|
 | 0 | Requirements, DOF, mass and power budgets | Done, [DCK-00](docs/00_requirements.md) |
 | 1 | Sim first actuator sizing and servo selection | Done, [DCK-01](docs/01_actuator_sizing.md) |
-| 2 | Electrical architecture, KiCad carrier board, harness | In progress, [DCK-02](docs/02_electrical.md) |
-| 3 | Mechanical CAD in Fusion with DFM rules | Planned |
+| 2 | Electrical architecture, KiCad carrier board, harness | Done, [DCK-02](docs/02_electrical.md) |
+| 3 | Mechanical CAD in Fusion with DFM rules | Next |
 | 4 | Engineering validation: FEA, tolerance stacks, range of motion, power | Planned |
 | 5 | Robot description: URDF, MJCF, ROS 2 package | Planned |
 | 6 | RL training and sim to sim transfer | Planned |

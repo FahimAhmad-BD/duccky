@@ -23,15 +23,15 @@ PROJ = HERE.parent / "carrier"
 FP_DIR = Path(os.environ["LOCALAPPDATA"]) / "Programs" / "KiCad" / "10.0" / "share" / "kicad" / "footprints"
 PROJECT_LIB = HERE.parent / "lib" / "duccky.pretty"
 
-BOARD_W, BOARD_H = 76.0, 58.0
+BOARD_W, BOARD_H = 76.0, 62.0
 SBC = (5.5, 1.0)                      # SBC board top left corner on the carrier
 SBC_HOLES = [(3.5, 3.5), (61.5, 3.5), (3.5, 26.5), (61.5, 26.5)]
 
 # Net classes: (track width, clearance, via diameter, via drill) in mm
 CLASSES = {
     "Default": (0.20, 0.15, 0.6, 0.3),
-    "Power": (0.50, 0.20, 0.8, 0.4),
-    "HighCurrent": (1.50, 0.25, 0.8, 0.4),
+    "Power": (0.30, 0.15, 0.6, 0.3),
+    "HighCurrent": (0.40, 0.15, 0.8, 0.4),
 }
 NET_CLASS = {
     "HighCurrent": ["VBAT", "VSYS", "SW_SERVO", "V5_SERVO"],
@@ -39,26 +39,29 @@ NET_CLASS = {
               "BAT_MID", "CHG_CBSET", "SPK_P", "SPK_N"],
 }
 
+# B.Cu power pours (x0, y0, x1, y1): battery entry to eFuse, eFuse output to both bucks
+POWER_POURS = {"VBAT": (0.5, 31.0, 18.2, 49.0), "VSYS": (19.0, 31.0, 47.0, 49.0)}
+
 # Fixed placements: ref -> (x, y, rotation deg). Connectors on the edges, ICs in their zones.
 FIXED = {
     # Mounting holes on the SBC pattern (also the trunk standoffs)
     **{f"H{i + 1}": (SBC[0] + hx, SBC[1] + hy, 0) for i, (hx, hy) in enumerate(SBC_HOLES)},
     "J5": None,                                   # SBC socket: placed by place_socket()
     # Left edge: battery, cell sense, main switch, debug
-    "J1": (3.2, 40.0, 270), "J2": (4.0, 30.0, 270), "J3": (4.0, 22.0, 270), "J6": (4.0, 14.0, 270),
+    "J1": (3.2, 41.5, 270), "J2": (3.5, 51.5, 270), "J3": (3.5, 19.5, 270), "J6": (3.5, 12.0, 270),
     # Right edge: USB-C charge, head board, speaker
-    "J4": (72.5, 42.0, 90), "J14": (72.0, 16.5, 90), "J13": (72.0, 30.5, 90),
+    "J4": (72.5, 46.0, 90), "J14": (72.0, 16.5, 90), "J13": (72.0, 35.0, 90),
     # Bottom edge: six servo ports, two per chain
-    "J7": (8.0, 54.5, 0), "J8": (19.5, 54.5, 0), "J9": (31.0, 54.5, 0),
-    "J10": (42.5, 54.5, 0), "J11": (54.0, 54.5, 0), "J12": (65.5, 54.5, 0),
-    # Power ICs near the battery entry
-    "U1": (13.0, 40.0, 0), "U2": (22.0, 42.0, 0), "L1": (22.0, 34.0, 0),
-    "U3": (33.0, 40.0, 0), "L2": (40.0, 40.0, 0), "U4": (36.0, 46.5, 0),
+    "J7": (8.0, 58.5, 0), "J8": (19.5, 58.5, 0), "J9": (31.0, 58.5, 0),
+    "J10": (42.5, 58.5, 0), "J11": (54.0, 58.5, 0), "J12": (65.5, 58.5, 0),
+    # Power chain left to right from the battery entry (XT30 body reaches x = 17)
+    "U1": (21.5, 39.0, 0), "U2": (32.0, 44.5, 0), "L1": (32.0, 35.5, 0),
+    "U3": (44.0, 41.0, 0), "L2": (50.5, 38.5, 0), "U4": (50.0, 46.0, 0),
     # Charger near the USB-C port
-    "U5": (60.0, 42.0, 0), "L3": (60.0, 36.5, 0),
+    "U5": (60.0, 40.0, 0), "L3": (60.0, 34.0, 0),
     # Bus buffers above their ports, IMU near the board centre, ADC and amplifier under the SBC
-    "U7": (13.0, 48.5, 0), "U8": (36.5, 50.5, 0), "U9": (59.5, 49.0, 0),
-    "U11": (46.0, 36.0, 0), "U6": (26.0, 20.0, 0), "U10": (60.0, 24.0, 0),
+    "U7": (14.0, 53.0, 0), "U8": (37.0, 53.0, 0), "U9": (60.0, 53.0, 0),
+    "U11": (38.0, 21.0, 0), "U6": (17.0, 25.5, 0), "U10": (58.0, 21.0, 0),
 }
 
 
@@ -86,7 +89,10 @@ def read_netlist(path):
         ref = str(find(c, "ref")[1])
         fpn = find(c, "footprint")
         val = str(find(c, "value")[1])
-        comps[ref] = {"fp": str(fpn[1]) if fpn else "", "value": val, "pins": {}}
+        ts = find(c, "tstamps")
+        props = {str(find(x, "name")[1]): (str(find(x, "value")[1]) if find(x, "value") else "") for x in find_all(c, "property")}
+        comps[ref] = {"fp": str(fpn[1]) if fpn else "", "value": val, "pins": {},
+                      "ts": str(ts[1]) if ts else "", "props": props}
     for n in find_all(find(net, "nets"), "net"):
         name = str(find(n, "name")[1])
         for node in find_all(n, "node"):
@@ -123,7 +129,7 @@ def set_netclasses(board):
             ns.SetNetclass(name, nc)
     for cls, nets in NET_CLASS.items():
         for n in nets:
-            ns.SetNetclassPatternAssignment(n, cls)
+            ns.SetNetclassPatternAssignment(N(n), cls)
 
 
 def write_project_netclasses():
@@ -136,11 +142,11 @@ def write_project_netclasses():
                         "via_drill": vdr, "priority": 0 if name == "HighCurrent" else (1 if name == "Power" else 2147483647)})
     pro["net_settings"] = {
         "classes": classes, "meta": {"version": 4},
-        "netclass_patterns": [{"netclass": c, "pattern": n} for c, nets in NET_CLASS.items() for n in nets],
+        "netclass_patterns": [{"netclass": c, "pattern": N(n)} for c, nets in NET_CLASS.items() for n in nets],
     }
     pro.setdefault("board", {}).setdefault("design_settings", {}).setdefault("rules", {}).update(
-        {"min_clearance": 0.15, "min_track_width": 0.15, "min_via_diameter": 0.45, "min_through_hole_diameter": 0.2,
-         "min_copper_edge_clearance": 0.3})
+        {"min_clearance": 0.15, "min_track_width": 0.10, "min_via_diameter": 0.45, "min_through_hole_diameter": 0.2,
+         "min_copper_edge_clearance": 0.3, "min_hole_clearance": 0.15})
     pro_path.write_text(json.dumps(pro, indent=2) + "\n", encoding="utf-8")
 
 
@@ -156,20 +162,28 @@ def add_outline(board):
         board.Add(seg)
 
 
-def add_zone(board, netname, layer, inset=0.3):
-    net = board.FindNet(netname)
+def N(name):
+    """Schematic local labels become nets named with the sheet path, "/NAME"."""
+    return "/" + name
+
+
+def add_zone(board, netname, layer, inset=0.3, rect=None, priority=0):
+    net = board.FindNet(N(netname))
+    if net is None:
+        raise KeyError(f"net {netname} not on board")
     z = pcbnew.ZONE(board)
     z.SetLayer(layer)
     z.SetNet(net)
     poly = z.Outline()
     poly.NewOutline()
-    for x, y in [(inset, inset), (BOARD_W - inset, inset), (BOARD_W - inset, BOARD_H - inset), (inset, BOARD_H - inset)]:
+    x0, y0, x1, y1 = rect or (inset, inset, BOARD_W - inset, BOARD_H - inset)
+    for x, y in [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]:
         poly.Append(mm(x), mm(y))
+    z.SetAssignedPriority(priority)
     z.SetLocalClearance(mm(0.25))
     z.SetMinThickness(mm(0.2))
-    z.SetPadConnection(pcbnew.ZONE_CONNECTION_THERMAL)
-    z.SetThermalReliefGap(mm(0.25))
-    z.SetThermalReliefSpokeWidth(mm(0.4))
+    z.SetPadConnection(pcbnew.ZONE_CONNECTION_FULL)
+    z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_ALWAYS)
     board.Add(z)
     return z
 
@@ -206,6 +220,24 @@ def place(comps):
         fp = load_fp(c["fp"])
         fp.SetReference(ref)
         fp.SetValue(c["value"])
+        fp.SetFPIDAsString(c["fp"])
+        if c["ts"]:
+            fp.SetPath(pcbnew.KIID_PATH("/" + c["ts"]))
+        for key in ("MPN", "Note"):
+            if key in c["props"]:
+                fp.SetField(key, c["props"][key])
+                f = fp.GetField(key)
+                f.SetVisible(False)
+                f.SetLayer(pcbnew.F_Fab)
+        if c["fp"].endswith("Texas_RNN0018A"):
+            # KiCad ships no RNN body; the TI RGR body has the same 3.5 x 3.5 mm outline (visual and clearance use only)
+            for m in list(fp.Models()):
+                m.m_Filename = "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/Texas_VQFN-RGR-20-1EP_3.5x3.5mm_Pitch0.5mm.step"
+        fp.Reference().SetLayer(pcbnew.F_Fab)
+        if "dnp" in c["props"]:
+            fp.SetDNP(True)
+        if "exclude_from_bom" in c["props"]:
+            fp.SetExcludedFromBOM(True)          # dense board: designators on the assembly drawing
         for pad in fp.Pads():
             n = c["pins"].get(pad.GetNumber())
             if n:
@@ -224,30 +256,43 @@ def place(comps):
             fp.SetPosition(vec(x, y))
         placed.append((ref, bbox(fp, 0.1)))
 
-    # Greedy placement of everything else next to the pads it connects to
+    # Greedy placement of everything else next to the pad of its most specific net
+    # (the net with the fewest pads), which is the IC pin the part serves.
+    net_pads = {}
+    for r, f in fps.items():
+        for p in f.Pads():
+            if p.GetNetname():
+                net_pads.setdefault(p.GetNetname(), []).append((r, p))
+
+    def specificity(ref):
+        sizes = [len(net_pads[p.GetNetname()]) for p in fps[ref].Pads()
+                 if p.GetNetname() and p.GetNetname() != "/GND"]
+        return min(sizes) if sizes else 999
+
     def target(ref):
-        pts = []
+        cands = []
         for pad in fps[ref].Pads():
             n = pad.GetNetname()
-            if not n or n == "GND":
+            if not n or n == "/GND":
                 continue
-            for other, ofp in fps.items():
-                if other == ref or other not in placed_refs:
-                    continue
-                for op in ofp.Pads():
-                    if op.GetNetname() == n:
-                        p = op.GetPosition()
-                        pts.append((pcbnew.ToMM(p.x), pcbnew.ToMM(p.y)))
-        if not pts:
+            others = [(r, p) for r, p in net_pads[n] if r != ref and r in placed_refs]
+            if others:
+                cands.append((len(net_pads[n]), others))
+        if not cands:
             return BOARD_W / 2, BOARD_H / 2
+        cands.sort(key=lambda c: c[0])
+        pts = [(pcbnew.ToMM(p.GetPosition().x), pcbnew.ToMM(p.GetPosition().y)) for _, p in cands[0][1]]
         return sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts)
 
     placed_refs = set(FIXED)
     rest = [r for r in fps if r not in placed_refs]
-    # Place parts that connect to placed parts first
     while rest:
-        rest.sort(key=lambda r: -sum(1 for p in fps[r].Pads() if p.GetNetname() not in ("", "GND")))
-        ref = rest.pop(0)
+        # Most specific first, and only once its anchor is on the board
+        rest.sort(key=lambda r: (specificity(r), r))
+        ready = [r for r in rest if any(rr in placed_refs for p in fps[r].Pads()
+                 if p.GetNetname() and p.GetNetname() != "/GND" for rr, _ in net_pads[p.GetNetname()] if rr != r)]
+        ref = (ready or rest)[0]
+        rest.remove(ref)
         fp = fps[ref]
         tx, ty = target(ref)
         best = None
@@ -260,7 +305,7 @@ def place(comps):
                 for rot in (0, 90):
                     fp.SetOrientationDegrees(rot)
                     fp.SetPosition(vec(x, y))
-                    bb = bbox(fp, 0.15)
+                    bb = bbox(fp, 0.4)
                     if inside_board(bb) and not any(overlaps(bb, o) for _, o in placed):
                         best = (x, y, rot, bb)
                         break
@@ -276,11 +321,14 @@ def place(comps):
         placed.append((ref, bb))
         placed_refs.add(ref)
 
-    # Planes: In1 GND, In2 servo rail; outer layers GND pour after routing
+    # Planes: In1 GND, In2 servo rail. Outer GND pours are added after routing (route.py).
     add_zone(board, "GND", pcbnew.In1_Cu)
-    add_zone(board, "V5_SERVO", pcbnew.In2_Cu)
-    for layer in (pcbnew.F_Cu, pcbnew.B_Cu):
-        add_zone(board, "GND", layer)
+    # Servo rail plane only below the computer, leaving In2 free for signals under it
+    add_zone(board, "V5_SERVO", pcbnew.In2_Cu, rect=(0.3, 30.0, BOARD_W - 0.3, BOARD_H - 0.3))
+    # Battery input and eFuse output pours on B.Cu across the power section (they carry
+    # up to 12.4 A; traces only escape into them)
+    for net, rect in POWER_POURS.items():
+        add_zone(board, net, pcbnew.B_Cu, rect=rect, priority=10)
     return board
 
 

@@ -1,0 +1,304 @@
+{
+  "assumptions": {
+    "loop_radius_mm": 12.0,
+    "connector_allowance_mm": 20.0,
+    "slack_mm": 10.0,
+    "trunk_runs_mm": {
+      "leg": 80.0,
+      "neck": 60.0,
+      "head_board": 70.0
+    }
+  },
+  "cables": [
+    {
+      "id": "L1",
+      "from": "carrier J7 (chain 1)",
+      "to": "left hip yaw servo",
+      "crosses": [],
+      "straight_mm": 100.0,
+      "service_loops_mm": {},
+      "length_mm": 110.0,
+      "cut_length_mm": 110,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": "power branch A: hip yaw, hip roll, hip pitch"
+    },
+    {
+      "id": "L2",
+      "from": "left hip yaw servo",
+      "to": "left hip roll servo",
+      "crosses": [
+        "hip_yaw"
+      ],
+      "straight_mm": 36.0,
+      "service_loops_mm": {
+        "hip_yaw": 12.0
+      },
+      "length_mm": 58.0,
+      "cut_length_mm": 60,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": ""
+    },
+    {
+      "id": "L3",
+      "from": "left hip roll servo",
+      "to": "left hip pitch servo",
+      "crosses": [
+        "hip_roll"
+      ],
+      "straight_mm": 32.0,
+      "service_loops_mm": {
+        "hip_roll": 9.6
+      },
+      "length_mm": 51.6,
+      "cut_length_mm": 55,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": ""
+    },
+    {
+      "id": "L4",
+      "from": "carrier J8 (chain 1)",
+      "to": "left knee servo",
+      "crosses": [
+        "hip_yaw",
+        "hip_roll",
+        "hip_pitch"
+      ],
+      "straight_mm": 184.0,
+      "service_loops_mm": {
+        "hip_yaw": 12.0,
+        "hip_roll": 9.6,
+        "hip_pitch": 38.4
+      },
+      "length_mm": 254.0,
+      "cut_length_mm": 255,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": "power branch B: knee, ankle; follows branch A through the hip"
+    },
+    {
+      "id": "L5",
+      "from": "left knee servo",
+      "to": "left ankle servo",
+      "crosses": [
+        "knee"
+      ],
+      "straight_mm": 70.0,
+      "service_loops_mm": {
+        "knee": 27.6
+      },
+      "length_mm": 107.6,
+      "cut_length_mm": 110,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": ""
+    },
+    {
+      "id": "R1",
+      "from": "carrier J9 (chain 2)",
+      "to": "right hip yaw servo",
+      "crosses": [],
+      "straight_mm": 100.0,
+      "service_loops_mm": {},
+      "length_mm": 110.0,
+      "cut_length_mm": 110,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": "power branch A: hip yaw, hip roll, hip pitch"
+    },
+    {
+      "id": "R2",
+      "from": "right hip yaw servo",
+      "to": "right hip roll servo",
+      "crosses": [
+        "hip_yaw"
+      ],
+      "straight_mm": 36.0,
+      "service_loops_mm": {
+        "hip_yaw": 12.0
+      },
+      "length_mm": 58.0,
+      "cut_length_mm": 60,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": ""
+    },
+    {
+      "id": "R3",
+      "from": "right hip roll servo",
+      "to": "right hip pitch servo",
+      "crosses": [
+        "hip_roll"
+      ],
+      "straight_mm": 32.0,
+      "service_loops_mm": {
+        "hip_roll": 9.6
+      },
+      "length_mm": 51.6,
+      "cut_length_mm": 55,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": ""
+    },
+    {
+      "id": "R4",
+      "from": "carrier J10 (chain 2)",
+      "to": "right knee servo",
+      "crosses": [
+        "hip_yaw",
+        "hip_roll",
+        "hip_pitch"
+      ],
+      "straight_mm": 184.0,
+      "service_loops_mm": {
+        "hip_yaw": 12.0,
+        "hip_roll": 9.6,
+        "hip_pitch": 38.4
+      },
+      "length_mm": 254.0,
+      "cut_length_mm": 255,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": "power branch B: knee, ankle; follows branch A through the hip"
+    },
+    {
+      "id": "R5",
+      "from": "right knee servo",
+      "to": "right ankle servo",
+      "crosses": [
+        "knee"
+      ],
+      "straight_mm": 70.0,
+      "service_loops_mm": {
+        "knee": 27.6
+      },
+      "length_mm": 107.6,
+      "cut_length_mm": 110,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": ""
+    },
+    {
+      "id": "N1",
+      "from": "carrier J11 (chain 3)",
+      "to": "neck pitch servo",
+      "crosses": [],
+      "straight_mm": 80.0,
+      "service_loops_mm": {},
+      "length_mm": 90.0,
+      "cut_length_mm": 90,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": ""
+    },
+    {
+      "id": "N2",
+      "from": "neck pitch servo",
+      "to": "head pitch servo",
+      "crosses": [
+        "neck_pitch"
+      ],
+      "straight_mm": 45.0,
+      "service_loops_mm": {
+        "neck_pitch": 30.0
+      },
+      "length_mm": 85.0,
+      "cut_length_mm": 90,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": ""
+    },
+    {
+      "id": "N3",
+      "from": "head pitch servo",
+      "to": "head yaw servo",
+      "crosses": [
+        "head_pitch"
+      ],
+      "straight_mm": 34.0,
+      "service_loops_mm": {
+        "head_pitch": 36.0
+      },
+      "length_mm": 80.0,
+      "cut_length_mm": 80,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": ""
+    },
+    {
+      "id": "N4",
+      "from": "head yaw servo",
+      "to": "head roll servo",
+      "crosses": [
+        "head_yaw"
+      ],
+      "straight_mm": 32.0,
+      "service_loops_mm": {
+        "head_yaw": 69.6
+      },
+      "length_mm": 111.6,
+      "cut_length_mm": 115,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": "crosses head yaw (5.8 rad travel): route along the yaw axis"
+    },
+    {
+      "id": "N5",
+      "from": "head roll servo",
+      "to": "beak servo",
+      "crosses": [
+        "head_roll"
+      ],
+      "straight_mm": 40.0,
+      "service_loops_mm": {
+        "head_roll": 10.8
+      },
+      "length_mm": 60.8,
+      "cut_length_mm": 65,
+      "connector": "JST EHR-03 both ends, SEH-001T-P0.6 crimps",
+      "wire": "3 x 22 AWG high flex silicone (UL3135)",
+      "pinout": "1 GND, 2 VDD 5.0 V, 3 DATA",
+      "note": ""
+    },
+    {
+      "id": "HB",
+      "from": "carrier J14",
+      "to": "head board",
+      "crosses": [
+        "neck_pitch",
+        "head_pitch",
+        "head_yaw",
+        "head_roll"
+      ],
+      "straight_mm": 141.0,
+      "service_loops_mm": {
+        "neck_pitch": 30.0,
+        "head_pitch": 36.0,
+        "head_yaw": 69.6,
+        "head_roll": 10.8
+      },
+      "length_mm": 297.4,
+      "cut_length_mm": 300,
+      "connector": "JST GHR-10V-S both ends, SSHL-002T-P0.2 crimps",
+      "wire": "10 x 28 AWG high flex silicone",
+      "pinout": "per carrier J14",
+      "note": "runs beside N1 to N4"
+    }
+  ]
+}
