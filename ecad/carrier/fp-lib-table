@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "duccky") (type "KiCad") (uri "${KIPRJMOD}/../lib/duccky.pretty") (options "") (descr "Duccky custom footprints"))
+)
