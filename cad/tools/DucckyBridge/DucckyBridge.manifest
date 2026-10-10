@@ -1,0 +1,13 @@
+{
+  "autodeskProduct": "Fusion",
+  "type": "addin",
+  "id": "4f6b2d1e-8c3a-4e57-9b0d-2a7f5c9e1d34",
+  "author": "Fahim Ahmad",
+  "description": {
+    "": "Runs Python jobs from Documents/ClaudeFusion/bridge/inbox so Claude Code can build and check the Duccky design."
+  },
+  "version": "1.0.0",
+  "runOnStartup": true,
+  "supportedOS": "windows|mac",
+  "editEnabled": true
+}
