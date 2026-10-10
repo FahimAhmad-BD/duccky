@@ -21,6 +21,7 @@ for attempt in 1 2 3; do
   if grep -q "Found 0 unconnected" "$OUT/drc.log"; then echo "routing attempt $attempt: complete"; break; fi
   echo "routing attempt $attempt: open connections remain"
 done
+"$KPY" pcb.py models
 "$KC" pcb export step --subst-models --include-tracks --include-zones -o "$OUT/carrier.step" "$OUT/carrier.kicad_pcb"
 "$KC" pcb render --side top --width 1600 --height 1300 -o "$(cygpath -w "$OUT")\carrier_top.png" "$OUT/carrier.kicad_pcb"
 "$KC" pcb render --side top --perspective --rotate "-45,0,30" --width 1600 --height 1200 -o "$(cygpath -w "$OUT")\carrier_iso.png" "$OUT/carrier.kicad_pcb"

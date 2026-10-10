@@ -71,7 +71,7 @@ def tps25982_rge0024m():
           ["tags", Q("VQFN TPS25982 RGE0024M")],
           _fp_text("Reference", "REF**", 0, -3.3, "F.SilkS"), _fp_text("Value", name, 0, 3.3, "F.Fab"),
           ["attr", "smd"]] + body + pads + [
-          ["model", Q("${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/VQFN-24-1EP_4x4mm_P0.5mm_EP2.45x2.45mm.step"),
+          ["model", Q("${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/Texas_RGE0024C_VQFN-24-1EP_4x4mm_P0.5mm_EP2.1x2.1mm.step"),
            ["offset", ["xyz", 0, 0, 0]], ["scale", ["xyz", 1, 1, 1]], ["rotate", ["xyz", 0, 0, 0]]]]
     return name, fp
 

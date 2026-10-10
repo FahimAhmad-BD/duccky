@@ -4,8 +4,9 @@ Run with KiCad's Python:  <kicad>/bin/python.exe pcb.py place
 Then route:               python route.py   (Freerouting, see route.py)
 
 Board origin is the top left corner, x right, y down (KiCad convention), in mm.
-The Radxa ZERO 3W sits above the board on the 2 x 20 socket; its four holes use the
-Raspberry Pi Zero pattern (58 x 23 mm), which the ZERO 3W shares (65 x 30 mm board).
+The Radxa ZERO 3W sits above the board on the 2 x 20 socket. Hole and header positions
+come from Radxa's DXF (radxa_zero_3w_v1110_top.dxf, in radxa_zero_3w_2d_dxf.zip), in the
+SBC frame with the header edge at y = 0.
 """
 import json
 import math
@@ -25,7 +26,8 @@ PROJECT_LIB = HERE.parent / "lib" / "duccky.pretty"
 
 BOARD_W, BOARD_H = 76.0, 62.0
 SBC = (5.5, 1.0)                      # SBC board top left corner on the carrier
-SBC_HOLES = [(3.5, 3.5), (61.5, 3.5), (3.5, 26.5), (61.5, 26.5)]
+SBC_HOLES = [(3.575, 3.525), (61.4, 3.525), (3.575, 26.4), (61.4, 26.4)]   # dia 2.82 in the DXF
+SBC_HEADER = (32.45, 3.325)                                                # centre of the 2 x 20 pads
 
 # Net classes: (track width, clearance, via diameter, via drill) in mm
 CLASSES = {
@@ -188,14 +190,32 @@ def add_zone(board, netname, layer, inset=0.3, rect=None, priority=0):
     return z
 
 
+# 3D bodies for footprints whose own model KiCad does not ship: same package outline,
+# used for the STEP export (visual and clearance only)
+_M = "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/"
+MODEL_SUBST = {
+    "Package_DFN_QFN:Texas_RNN0018A": _M + "Texas_VQFN-RGR-20-1EP_3.5x3.5mm_Pitch0.5mm.step",
+    "Package_DFN_QFN:TQFN-16-1EP_3x3mm_P0.5mm_EP1.23x1.23mm": _M + "TQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm.step",
+    "duccky:Texas_RGE0024M_TPS25982": _M + "Texas_RGE0024C_VQFN-24-1EP_4x4mm_P0.5mm_EP2.1x2.1mm.step",
+}
+
+
+def apply_model(fp, fpid):
+    if fpid in MODEL_SUBST:
+        ms = fp.Models()
+        ms.clear()
+        m = pcbnew.FP_3DMODEL()
+        m.m_Filename = MODEL_SUBST[fpid]
+        ms.push_back(m)
+
+
 def place_socket(fp):
-    """Rotate the 2 x 20 socket so its rows run along x, centred on the SBC header position
-    (Pi Zero pattern: header centre 32.5 mm along and 3.5 mm in from the SBC's long edge)."""
+    """Rotate the 2 x 20 socket so its rows run along x, centred on the SBC header position."""
     fp.SetOrientationDegrees(90)
     pads = [p.GetPosition() for p in fp.Pads()]
     cx = sum(pcbnew.ToMM(p.x) for p in pads) / len(pads)
     cy = sum(pcbnew.ToMM(p.y) for p in pads) / len(pads)
-    tx, ty = SBC[0] + 32.5, SBC[1] + 3.5
+    tx, ty = SBC[0] + SBC_HEADER[0], SBC[1] + SBC_HEADER[1]
     pos = fp.GetPosition()
     fp.SetPosition(vec(pcbnew.ToMM(pos.x) + tx - cx, pcbnew.ToMM(pos.y) + ty - cy))
 
@@ -229,10 +249,7 @@ def place(comps):
                 f = fp.GetField(key)
                 f.SetVisible(False)
                 f.SetLayer(pcbnew.F_Fab)
-        if c["fp"].endswith("Texas_RNN0018A"):
-            # KiCad ships no RNN body; the TI RGR body has the same 3.5 x 3.5 mm outline (visual and clearance use only)
-            for m in list(fp.Models()):
-                m.m_Filename = "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/Texas_VQFN-RGR-20-1EP_3.5x3.5mm_Pitch0.5mm.step"
+        apply_model(fp, c["fp"])
         fp.Reference().SetLayer(pcbnew.F_Fab)
         if "dnp" in c["props"]:
             fp.SetDNP(True)
@@ -334,6 +351,14 @@ def place(comps):
 
 def main(cmd):
     comps = read_netlist(PROJ / "carrier.net")
+    if cmd == "models":
+        path = PROJ / "carrier.kicad_pcb"
+        board = pcbnew.LoadBoard(str(path))
+        for fp in board.GetFootprints():
+            apply_model(fp, fp.GetFPIDAsString())
+        pcbnew.SaveBoard(str(path), board)
+        print("3D model substitutions applied")
+        return
     if cmd == "place":
         board = place(comps)
         out = PROJ / "carrier.kicad_pcb"

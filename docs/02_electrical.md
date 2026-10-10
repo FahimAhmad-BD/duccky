@@ -191,7 +191,7 @@ UART2 (pins 8 and 10) remains the debug console. Pins 3 and 5 carry I2C pull-up 
 | Net classes | Default 0.20 mm track and 0.15 mm clearance; Power 0.30 mm; HighCurrent 0.40 mm escapes into pours |
 | High current paths | B.Cu and F.Cu pours for VBAT (battery entry to eFuse) and VSYS (eFuse to both regulators), In2 plane for the 5.0 V servo rail, stitched with vias |
 | Verification | KiCad ERC: one warning (amplifier exposed pad typed "unspecified" in the KiCad symbol). KiCad DRC with schematic parity and all severities: 0 violations, 0 unconnected pads, 0 footprint errors |
-| 3D model | `ecad/carrier/carrier.step`; KiCad has no body for the XT30PW-M (pads only) and none for the RNN package (the TI RGR body of the same 3.5 × 3.5 mm outline stands in); the XT30 body is modelled in Phase 3 |
+| 3D model | `ecad/carrier/carrier.step`; KiCad ships no body for the XT30PW-M (pads only; modelled in Phase 3), the RNN package, the 1.23 mm pad TQFN-16 or the RGE0024M; for those three, KiCad bodies of the same package outline stand in (`MODEL_SUBST` in `ecad/gen/pcb.py`) |
 
 Connector placement follows the trunk: battery (XT30), cell sense, main switch and debug UART on the left edge; USB-C charge port, speaker and head board link on the right edge; six servo ports along the bottom edge, two per chain.
 
